@@ -1,0 +1,492 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>dynamic_main</title><meta name="generator" content="MATLAB 9.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-10-09"><meta name="DC.source" content="dynamic_main.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span class="comment">%%%Main program: dynamic analysis</span>
+<span class="comment">%%%Author: Chen Shen</span>
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span class="comment">% clear;</span>
+<span class="comment">% %%</span>
+<span class="comment">% %%build track model</span>
+disp ([<span class="string">'Start assembling system matrix. Time: '</span> datestr(now)]);
+tic;
+TRACK_main2;
+<span class="keyword">if</span> flag==1
+    <span class="keyword">return</span>
+<span class="keyword">end</span>
+
+disp ([<span class="string">'Matrix assembly complete. Time used: '</span>, num2str(toc),<span class="string">' s'</span>]);
+</pre><pre class="codeoutput">Start assembling system matrix. Time: 09-Oct-2018 11:13:58
+Matrix assembly complete. Time used: 0.0010268 s
+</pre><pre class="codeinput"><span class="comment">%%initial conditions</span>
+acc.r=zeros(inp.solver.n_ts+1,length(mat_trk.K_reduced));
+vel.r=zeros(inp.solver.n_ts+1,length(mat_trk.K_reduced));
+dis.r=zeros(inp.solver.n_ts+1,length(mat_trk.K_reduced));
+acc.w=zeros(inp.solver.n_ts+1,2);
+vel.w=zeros(inp.solver.n_ts+1,2);
+dis.w=zeros(inp.solver.n_ts+1,2);
+Z.w=zeros(inp.solver.n_ts+1,2);
+Z.r=zeros(inp.solver.n_ts+1,2);
+Z.irr=zeros(inp.solver.n_ts+1,2); <span class="comment">%can be read in with files</span>
+F=zeros(inp.solver.n_ts+1,2);
+X_w=zeros(inp.solver.n_ts+1,1);
+X_w(1,1)=6;   <span class="comment">%initial x coordinates of wheel</span>
+vx=inp.solver.Vx; <span class="comment">%vehicle speed</span>
+contactID=5; <span class="comment">%5 for non-linear  10 for linear 8 for winkler bedding</span>
+zdd=load(inp.ext_force.timeh);
+Fex=zeros(length(zdd),2);
+<span class="keyword">if</span> isempty(mat_ws)
+    mc_ws=zeros(inp.solver.n_ts+1,1);
+<span class="keyword">else</span>
+mc_ws=zeros(inp.solver.n_ts+1,size(mat_ws.A,1)); <span class="comment">%modal coordinates for flexible wheelset model</span>
+<span class="keyword">end</span>
+</pre><pre class="codeinput"><span class="comment">%%irregularity definition</span>
+prompt=<span class="string">'Please select the irregularity definition(1.Sinsoidal;2.Input file: [1]\n'</span>;
+
+i=input(prompt);
+flag=0;
+<span class="keyword">if</span> isempty(i)
+    i=1;
+<span class="keyword">end</span>
+
+<span class="keyword">switch</span> i
+    <span class="keyword">case</span> 1
+        <span class="comment">%%irregularity definition: squat G302 maria</span>
+        irr_depth=0.2e-3;
+        irr_length=30e-3;
+        irr_x0=6.5; <span class="comment">%30.38=15.38=0.98 in FE 15.5=1.1</span>
+        irr_ts0=round((irr_x0-X_w(1,1))/vx/inp.solver.deltat);
+        irr_ts1=round((irr_x0-X_w(1,1)+1*irr_length)/vx/inp.solver.deltat);
+
+        <span class="comment">%%irregularity definition: wheelflat benchmark</span>
+<span class="comment">%         irr_depth=0.3e-3;</span>
+<span class="comment">%         irr_length=50e-3;</span>
+<span class="comment">%         irr_x0=30.575;</span>
+<span class="comment">%         irr_ts0=round((irr_x0-X_w(1,1))/vx/inp.solver.deltat);</span>
+<span class="comment">%         irr_ts1=round((irr_x0-X_w(1,1)+irr_length)/vx/inp.solver.deltat);</span>
+<span class="comment">%</span>
+<span class="comment">%</span>
+
+        <span class="keyword">for</span> i=irr_ts0:1:irr_ts1
+            Z.irr(i,1)=irr_depth./2*(cos(2*pi./irr_length*(vx*inp.solver.deltat*i-(irr_x0-X_w(1,1))))-1);
+        <span class="keyword">end</span>
+
+    <span class="keyword">case</span> 2
+        <span class="comment">%%irregularity definition: measured</span>
+        load(<span class="string">'D:\TRACK\measured_geometry_squat_Molodova_2014.mat'</span>, <span class="string">'irr'</span>);
+        irr_length=215e-3;
+        irr_x0=6.4; <span class="comment">%30.38=0.98 in FE</span>
+        irr(:,3)=irr_x0+irr(:,1);
+        irr_ts0=round((irr_x0-X_w(1,1))/vx/inp.solver.deltat);
+        irr_ts1=round((irr_x0-X_w(1,1)+irr_length)/vx/inp.solver.deltat);
+
+        <span class="keyword">for</span> i=irr_ts0:1:irr_ts1
+            xq=vx*inp.solver.deltat*i+X_w(1,1);
+
+            Z.irr(i,1)=interp1(irr(:,3),irr(:,2),xq,<span class="string">'linear'</span>,<span class="string">'extrap'</span>);
+        <span class="keyword">end</span>
+    <span class="keyword">case</span> 3
+        <span class="comment">%%irregularity definition: half sine</span>
+        irr_depth=0.2e-3;
+        irr_length=30e-3;
+        irr_x0=15.285; <span class="comment">%30.38=15.38=0.98 in FE 15.5=1.1</span>
+        irr_ts0=round((irr_x0-X_w(1,1))/vx/inp.solver.deltat);
+        irr_ts1=round((irr_x0-X_w(1,1)+irr_length)/vx/inp.solver.deltat);
+
+
+
+        <span class="keyword">for</span> i=irr_ts0:1:irr_ts1
+            Z.irr(i,1)=-irr_depth.*(sin(pi./irr_length*(vx*inp.solver.deltat*i-(irr_x0-X_w(1,1)))));
+        <span class="keyword">end</span>
+    <span class="keyword">case</span> 4
+        <span class="comment">%%irregularity definition: dipped joint</span>
+        irr_depth=3.5e-3;
+        irr_length=1;
+        irr_x0=15.1; <span class="comment">%30.38=15.38=0.98 in FE 15.5=1.1</span>
+        irr_ts0=round((irr_x0-X_w(1,1))/vx/inp.solver.deltat);
+        irr_ts1=round((irr_x0-X_w(1,1)+irr_length)/vx/inp.solver.deltat);
+
+        <span class="keyword">for</span> i=irr_ts0:1:round(irr_ts1/2)
+            Z.irr(i,1)=-irr_depth.*(vx*inp.solver.deltat*i-(irr_x0-X_w(1,1)))/(irr_length/2);
+
+        <span class="keyword">end</span>
+        <span class="keyword">for</span> i=round(irr_ts1/2)+1:irr_ts1
+        Z.irr(i,1)=-irr_depth.*(irr_length-(vx*inp.solver.deltat*i-(irr_x0-X_w(1,1))))/(irr_length/2);
+        <span class="keyword">end</span>
+
+<span class="keyword">end</span>
+
+Z.irr(:,2)=zeros(length(Z.irr(:,1)),1);<span class="comment">%irregularity on the other rail</span>
+</pre><pre class="codeoutput error">Error using input
+Cannot call INPUT from EVALC.
+
+Error in dynamic_main (line 43)
+i=input(prompt);
+</pre><pre class="codeinput"><span class="comment">%%irregularity definition: measured</span>
+<span class="comment">% load('measured_geometry_squat_Molodova_2014.mat', 'irr');</span>
+<span class="comment">% irr_length=200e-3;</span>
+<span class="comment">% irr_x0=30.2; %30.38=0.98 in FE</span>
+<span class="comment">% irr(:,3)=irr_x0+irr(:,1);</span>
+<span class="comment">% irr_ts0=round((irr_x0-X_w(1,1))/vx/inp.solver.deltat);</span>
+<span class="comment">% irr_ts1=round((irr_x0-X_w(1,1)+irr_length)/vx/inp.solver.deltat);</span>
+<span class="comment">%</span>
+<span class="comment">% for i=irr_ts0:1:irr_ts1;</span>
+<span class="comment">% xq=vx*inp.solver.deltat*i+X_w(1,1);</span>
+<span class="comment">%</span>
+<span class="comment">% Z.irr(i,1)=interp1(irr(:,3),irr(:,2),xq,'linear','extrap');</span>
+<span class="comment">% end</span>
+</pre><pre class="codeinput">prompt=<span class="string">'Moving irregularity(1yes;2 no: [2]\n'</span>;
+i=input(prompt);
+flag=0;
+<span class="keyword">if</span> isempty(i)
+    i=2;
+<span class="keyword">end</span>
+    <span class="keyword">switch</span> i
+    <span class="keyword">case</span> 1
+    <span class="comment">%</span>
+    vx=0;
+    X_w(1,1)=6.5;
+    <span class="comment">%</span>
+
+    <span class="keyword">case</span> 2
+    <span class="keyword">end</span>
+
+
+<span class="comment">%%shape function for initial condition</span>
+<span class="comment">% shape_initial=form_shape_fun(geo,mat_trk,[X_w(1,1),-0.75,0]);</span>
+shape_initial(1,:)=form_shape_fun(geo,mat_trk,[X_w(1,1),-0.75,0]);
+shape_initial(2,:)=form_shape_fun(geo,mat_trk,[X_w(1,1),0.75,0]);
+
+<span class="comment">%static analysis</span>
+[dis_initial,Z_initial,F_initial]=solver_static(mat_trk,inp,shape_initial,contactID);
+dis.r(1,:)=dis_initial.r;
+dis.w(1,:)=dis_initial.w;
+Z.r(1,:)=Z_initial.r;
+
+Z.w(1,:)=Z_initial.w;
+
+F(1,:)=F_initial;
+</pre><pre class="codeinput"><span class="comment">%dynamic analysis</span>
+disp ([<span class="string">'Starting Newmark intergration. Time: '</span> datestr(now)]);
+tic;
+<span class="keyword">for</span> i=1:inp.solver.n_ts
+    X_w(i+1,1)=X_w(1,1)+i*inp.solver.deltat*vx;
+    shape(1,:)=form_shape_fun(geo,mat_trk,[X_w(i+1,1),-0.75,0]);
+    shape(2,:)=form_shape_fun(geo,mat_trk,[X_w(i+1,1),0.75,0]);
+
+    acc1.r=acc.r(i,:);
+    vel1.r=vel.r(i,:);
+    dis1.r=dis.r(i,:);
+    acc1.w=acc.w(i,:);
+    vel1.w=vel.w(i,:);
+    dis1.w=dis.w(i,:);
+    position.w=Z.w(i,:);
+    position.r=Z.r(i,:);
+    position.irr=Z.irr(i,:);
+    mc_ws1=mc_ws(i,:)';
+
+
+
+    [acc2,vel2,dis2,F_contact,position,mc_ws2]=solver_newmark_iter(mat_trk,inp,shape,<span class="keyword">...</span>
+        position, inp.ext_force.wh_ld, acc1, vel1, dis1,mc_ws1,X_w(i+1,1), geo, Z,contactID,Fex(i,:),mat_ws);
+
+    mc_ws(i+1,:)=mc_ws2';
+    acc.r(i+1,:)=acc2.r;
+    vel.r(i+1,:)=vel2.r;
+    dis.r(i+1,:)=dis2.r;
+    acc.w(i+1,:)=acc2.w;
+    vel.w(i+1,:)=vel2.w;
+    dis.w(i+1,:)=dis2.w;
+    Z.w(i+1,:)=position.w;
+    Z.r(i+1,:)=position.r;
+<span class="comment">%     Z.irr(i+1,1)=position.irr;</span>
+    F(i+1,:)=F_contact;
+    <span class="keyword">if</span> ismember(i,1000*linspace(1,10,10))
+        disp ([<span class="string">'Time step: '</span> num2str(i) <span class="string">'finished. Time'</span> num2str(toc)]);
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+</pre><p>figure; plot(X_w,F);</p><pre class="codeinput">clear <span class="string">acc1</span> <span class="string">acc2</span> <span class="string">dis1</span> <span class="string">dis2</span> <span class="string">dis_initial</span> <span class="string">i</span> <span class="string">position</span> <span class="string">shape</span> <span class="string">vel1</span> <span class="string">vel2</span>;
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%Main program: dynamic analysis
+%%%Author: Chen Shen
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% clear;
+% %%
+% %%build track model
+disp (['Start assembling system matrix. Time: ' datestr(now)]);
+tic;
+TRACK_main2;
+if flag==1
+    return
+end
+
+disp (['Matrix assembly complete. Time used: ', num2str(toc),' s']);
+%%
+%%initial conditions
+acc.r=zeros(inp.solver.n_ts+1,length(mat_trk.K_reduced));
+vel.r=zeros(inp.solver.n_ts+1,length(mat_trk.K_reduced));
+dis.r=zeros(inp.solver.n_ts+1,length(mat_trk.K_reduced));
+acc.w=zeros(inp.solver.n_ts+1,2);
+vel.w=zeros(inp.solver.n_ts+1,2);
+dis.w=zeros(inp.solver.n_ts+1,2);
+Z.w=zeros(inp.solver.n_ts+1,2);
+Z.r=zeros(inp.solver.n_ts+1,2);
+Z.irr=zeros(inp.solver.n_ts+1,2); %can be read in with files
+F=zeros(inp.solver.n_ts+1,2);
+X_w=zeros(inp.solver.n_ts+1,1);
+X_w(1,1)=6;   %initial x coordinates of wheel
+vx=inp.solver.Vx; %vehicle speed
+contactID=5; %5 for non-linear  10 for linear 8 for winkler bedding 
+zdd=load(inp.ext_force.timeh);
+Fex=zeros(length(zdd),2);
+if isempty(mat_ws)
+    mc_ws=zeros(inp.solver.n_ts+1,1);
+else
+mc_ws=zeros(inp.solver.n_ts+1,size(mat_ws.A,1)); %modal coordinates for flexible wheelset model
+end
+%%
+%%irregularity definition
+prompt='Please select the irregularity definition(1.Sinsoidal;2.Input file: [1]\n';
+
+i=input(prompt);
+flag=0;
+if isempty(i)
+    i=1;
+end
+
+switch i
+    case 1
+        %%irregularity definition: squat G302 maria
+        irr_depth=0.2e-3;
+        irr_length=30e-3;
+        irr_x0=6.5; %30.38=15.38=0.98 in FE 15.5=1.1
+        irr_ts0=round((irr_x0-X_w(1,1))/vx/inp.solver.deltat);
+        irr_ts1=round((irr_x0-X_w(1,1)+1*irr_length)/vx/inp.solver.deltat);
+        
+        %%irregularity definition: wheelflat benchmark
+%         irr_depth=0.3e-3;
+%         irr_length=50e-3;
+%         irr_x0=30.575;
+%         irr_ts0=round((irr_x0-X_w(1,1))/vx/inp.solver.deltat);
+%         irr_ts1=round((irr_x0-X_w(1,1)+irr_length)/vx/inp.solver.deltat);
+%         
+%         
+        
+        for i=irr_ts0:1:irr_ts1           
+            Z.irr(i,1)=irr_depth./2*(cos(2*pi./irr_length*(vx*inp.solver.deltat*i-(irr_x0-X_w(1,1))))-1);
+        end
+        
+    case 2
+        %%irregularity definition: measured
+        load('D:\TRACK\measured_geometry_squat_Molodova_2014.mat', 'irr');
+        irr_length=215e-3;
+        irr_x0=6.4; %30.38=0.98 in FE
+        irr(:,3)=irr_x0+irr(:,1);
+        irr_ts0=round((irr_x0-X_w(1,1))/vx/inp.solver.deltat);
+        irr_ts1=round((irr_x0-X_w(1,1)+irr_length)/vx/inp.solver.deltat);
+        
+        for i=irr_ts0:1:irr_ts1
+            xq=vx*inp.solver.deltat*i+X_w(1,1);
+            
+            Z.irr(i,1)=interp1(irr(:,3),irr(:,2),xq,'linear','extrap');
+        end
+    case 3
+        %%irregularity definition: half sine
+        irr_depth=0.2e-3;
+        irr_length=30e-3;
+        irr_x0=15.285; %30.38=15.38=0.98 in FE 15.5=1.1
+        irr_ts0=round((irr_x0-X_w(1,1))/vx/inp.solver.deltat);
+        irr_ts1=round((irr_x0-X_w(1,1)+irr_length)/vx/inp.solver.deltat);
+        
+       
+        
+        for i=irr_ts0:1:irr_ts1          
+            Z.irr(i,1)=-irr_depth.*(sin(pi./irr_length*(vx*inp.solver.deltat*i-(irr_x0-X_w(1,1)))));
+        end
+    case 4
+        %%irregularity definition: dipped joint
+        irr_depth=3.5e-3;
+        irr_length=1;
+        irr_x0=15.1; %30.38=15.38=0.98 in FE 15.5=1.1
+        irr_ts0=round((irr_x0-X_w(1,1))/vx/inp.solver.deltat);
+        irr_ts1=round((irr_x0-X_w(1,1)+irr_length)/vx/inp.solver.deltat);
+        
+        for i=irr_ts0:1:round(irr_ts1/2)
+            Z.irr(i,1)=-irr_depth.*(vx*inp.solver.deltat*i-(irr_x0-X_w(1,1)))/(irr_length/2);
+        
+        end
+        for i=round(irr_ts1/2)+1:irr_ts1
+        Z.irr(i,1)=-irr_depth.*(irr_length-(vx*inp.solver.deltat*i-(irr_x0-X_w(1,1))))/(irr_length/2);
+        end
+        
+end
+
+Z.irr(:,2)=zeros(length(Z.irr(:,1)),1);%irregularity on the other rail 
+
+%%
+%%irregularity definition: measured
+% load('measured_geometry_squat_Molodova_2014.mat', 'irr'); 
+% irr_length=200e-3;
+% irr_x0=30.2; %30.38=0.98 in FE
+% irr(:,3)=irr_x0+irr(:,1);
+% irr_ts0=round((irr_x0-X_w(1,1))/vx/inp.solver.deltat);
+% irr_ts1=round((irr_x0-X_w(1,1)+irr_length)/vx/inp.solver.deltat);
+% 
+% for i=irr_ts0:1:irr_ts1;
+% xq=vx*inp.solver.deltat*i+X_w(1,1);
+% 
+% Z.irr(i,1)=interp1(irr(:,3),irr(:,2),xq,'linear','extrap');
+% end
+%%
+prompt='Moving irregularity(1yes;2 no: [2]\n';
+i=input(prompt);
+flag=0;
+if isempty(i)
+    i=2;
+end
+    switch i
+    case 1
+    %
+    vx=0;
+    X_w(1,1)=6.5;
+    %
+
+    case 2
+    end
+    
+ 
+%%shape function for initial condition
+% shape_initial=form_shape_fun(geo,mat_trk,[X_w(1,1),-0.75,0]);
+shape_initial(1,:)=form_shape_fun(geo,mat_trk,[X_w(1,1),-0.75,0]);
+shape_initial(2,:)=form_shape_fun(geo,mat_trk,[X_w(1,1),0.75,0]);
+
+%static analysis
+[dis_initial,Z_initial,F_initial]=solver_static(mat_trk,inp,shape_initial,contactID);
+dis.r(1,:)=dis_initial.r;
+dis.w(1,:)=dis_initial.w;
+Z.r(1,:)=Z_initial.r;
+
+Z.w(1,:)=Z_initial.w;
+
+F(1,:)=F_initial;
+
+
+
+    
+    
+%%
+%dynamic analysis
+disp (['Starting Newmark intergration. Time: ' datestr(now)]);
+tic;
+for i=1:inp.solver.n_ts
+    X_w(i+1,1)=X_w(1,1)+i*inp.solver.deltat*vx;
+    shape(1,:)=form_shape_fun(geo,mat_trk,[X_w(i+1,1),-0.75,0]);
+    shape(2,:)=form_shape_fun(geo,mat_trk,[X_w(i+1,1),0.75,0]);
+     
+    acc1.r=acc.r(i,:);
+    vel1.r=vel.r(i,:);
+    dis1.r=dis.r(i,:);
+    acc1.w=acc.w(i,:);
+    vel1.w=vel.w(i,:);
+    dis1.w=dis.w(i,:);
+    position.w=Z.w(i,:);
+    position.r=Z.r(i,:); 
+    position.irr=Z.irr(i,:);
+    mc_ws1=mc_ws(i,:)';
+    
+     
+    
+    [acc2,vel2,dis2,F_contact,position,mc_ws2]=solver_newmark_iter(mat_trk,inp,shape,...
+        position, inp.ext_force.wh_ld, acc1, vel1, dis1,mc_ws1,X_w(i+1,1), geo, Z,contactID,Fex(i,:),mat_ws);
+    
+    mc_ws(i+1,:)=mc_ws2';
+    acc.r(i+1,:)=acc2.r;
+    vel.r(i+1,:)=vel2.r;
+    dis.r(i+1,:)=dis2.r;
+    acc.w(i+1,:)=acc2.w;
+    vel.w(i+1,:)=vel2.w;
+    dis.w(i+1,:)=dis2.w;
+    Z.w(i+1,:)=position.w;
+    Z.r(i+1,:)=position.r;
+%     Z.irr(i+1,1)=position.irr;
+    F(i+1,:)=F_contact;
+    if ismember(i,1000*linspace(1,10,10))
+        disp (['Time step: ' num2str(i) 'finished. Time' num2str(toc)]);
+    end
+end
+
+%%
+% figure;
+% plot(X_w,F);
+
+%%
+clear acc1 acc2 dis1 dis2 dis_initial i position shape vel1 vel2;
+##### SOURCE END #####
+--></body></html>

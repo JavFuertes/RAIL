@@ -1,0 +1,1943 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"hammer",
+				"hammer_main_snst_mcs"
+			],
+			[
+				"end",
+				"end\tend(p,k,n)"
+			],
+			[
+				"iso",
+				"iostream\tstandard header"
+			],
+			[
+				"for",
+				"for\tMatlab method"
+			],
+			[
+				"r",
+				"readANSYSModeFile2"
+			],
+			[
+				"plot",
+				"plot\tComm method"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "geo/mesh_trk_full.m",
+			"settings":
+			{
+				"buffer_size": 3745,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "snst_hammer_Saltelli.m",
+			"settings":
+			{
+				"buffer_size": 2128,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "matrix/form_mat_trk.m",
+			"settings":
+			{
+				"buffer_size": 5006,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "dynamic_main.m",
+			"settings":
+			{
+				"buffer_size": 6300,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "snst_time_domain.m",
+			"settings":
+			{
+				"buffer_size": 1439,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "snst_time_domain_mcs.m",
+			"settings":
+			{
+				"buffer_size": 3126,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/E/onedrive/Lib_matlab/cutsig.m",
+			"settings":
+			{
+				"buffer_size": 250,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "eig2frf.m",
+			"settings":
+			{
+				"buffer_size": 769,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "snst_maxF_dynamic_model.m",
+			"settings":
+			{
+				"buffer_size": 802,
+				"line_ending": "Windows",
+				"name": "function []"
+			}
+		},
+		{
+			"file": "snstv_eig_damped.m",
+			"settings":
+			{
+				"buffer_size": 1336,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/E/onedrive/Lib_matlab/shape2dispersion.m",
+			"settings":
+			{
+				"buffer_size": 512,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "eig_vis.m",
+			"settings":
+			{
+				"buffer_size": 536,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "plt_eig.m",
+			"settings":
+			{
+				"buffer_size": 470,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "plot_modeShape.m",
+			"settings":
+			{
+				"buffer_size": 353,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "hammer_main_snst_mcs.m",
+			"settings":
+			{
+				"buffer_size": 1775,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/E/onedrive/Lib_matlab/postprocessing measurement data/tran_fun.m",
+			"settings":
+			{
+				"buffer_size": 1023,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "hammer_main.m",
+			"settings":
+			{
+				"buffer_size": 1886,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "solver/solver_newmark.m",
+			"settings":
+			{
+				"buffer_size": 2746,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "dynamic_main_snst_mcs.m",
+			"settings":
+			{
+				"buffer_size": 4905,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "matrix/form_mat_ws.m",
+			"settings":
+			{
+				"buffer_size": 154,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "dynamic_main_snst.m",
+			"settings":
+			{
+				"buffer_size": 4812,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "snst_time_domain_long_track.m",
+			"settings":
+			{
+				"buffer_size": 1531,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "snst_hammer_mcs.m",
+			"settings":
+			{
+				"buffer_size": 2770,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Programs/MSC.Software/Adams/2017/arail/shared_rail_database.cdb/wheel_rail_profiles.tbl/mdi_UIC60.rpr",
+			"settings":
+			{
+				"buffer_size": 1457,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "input/get_input_4.m",
+			"settings":
+			{
+				"buffer_size": 5111,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "matrix/form_shape_fun2.m",
+			"settings":
+			{
+				"buffer_size": 1714,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "lib/Nshape.m",
+			"settings":
+			{
+				"buffer_size": 1771,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "input/get_input_3.m",
+			"settings":
+			{
+				"buffer_size": 4482,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"git",
+				"Git: Status"
+			],
+			[
+				"pa",
+				"Package Control: List Packages"
+			],
+			[
+				"repl ma",
+				"SublimeREPL: Matlab"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Add Repository"
+			],
+			[
+				"git stat",
+				"Git: Status"
+			],
+			[
+				"gitgutter",
+				"GitGutter: Compare Against Commit"
+			],
+			[
+				"package control in",
+				"Package Control: Install Package"
+			],
+			[
+				"git ",
+				"Git: Change Branch"
+			],
+			[
+				"git status",
+				"Git: Status"
+			],
+			[
+				"pac",
+				"Package Control: Install Package"
+			],
+			[
+				"gi",
+				"Set Syntax: Git Log"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 164.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/E/onedrive/Lib_matlab",
+		"/E/onedrive/Lib_matlab/safe_R1.1"
+	],
+	"file_history":
+	[
+		"/E/FE/full_track_wheelset/model_half_trk_half_ws/on_support/hammer/regular_bc_slp_E80/command.txt",
+		"/D/Xiangyun/twowheels/twowheels_initial_2_1/twowheels_initial_2_1_commond.txt",
+		"/E/onedrive/Lib_matlab/plotwavelet.m",
+		"/D/Romania_Oct_2017_backup/pltWavelet.m",
+		"/D/MBD_steffens_bm/wheelflat/mnf_steffens_bm_verification_dout1_nominal_updated_dyn.log",
+		"/C/Programs/MSC.Software/Adams/2017/arail/shared_rail_database.cdb/flexref_configs.tbl/flexref_crossing_real_profile.frp",
+		"/C/Programs/MSC.Software/Adams/2017/arail/shared_rail_database.cdb/flexref_configs.tbl/flexref_Maria_Sqt.frp",
+		"/D/Xiangyun/onewheel/maria_cas/acc.txt",
+		"/D/Xiangyun/onewheel/maria_cas/force.txt",
+		"/D/Xiangyun/onewheel/output_newk_one_wheels_artificialdefects.dat",
+		"/E/FE/1 Validation of FE in high frequency range/FE simulations/Simulation results/Artificial defect B4 Nov 2010 m1_hrgls_0.1/force.txt",
+		"/C/Users/chenshen/AppData/Local/Microsoft/Windows/Temporary Internet Files/Content.Outlook/955YHU2F/flexref_Steffens_bm.frp",
+		"/D/Working_sample_coupling/UIC60_for_contactmethod.rpr",
+		"/D/Working_sample_coupling/VI-Rail contact table/aa.txt",
+		"/C/Programs/MSC.Software/Adams/2017/arail/shared_rail_database.cdb/wheel_rail_profiles.tbl/rail_UIC60_inc025.rpr",
+		"/E/onedrive/Lib_matlab/Global-Sensitivity-Analysis-master/Sen_FirstOrder_Saltelli_multiple.m",
+		"/E/onedrive/fem/TRACK_v3.0/snst_hammer_model.m",
+		"/H/Application data/untitled.msh",
+		"/H/Application data/untitled.geo",
+		"/D/chenshen/Downloads/gmsh-4.2.3-Windows64/demos/api/README.txt",
+		"/D/chenshen/Downloads/gmsh-4.2.3-Windows64/demos/api/crack.py",
+		"/D/chenshen/Downloads/gmsh-4.2.3-Windows64/README.txt",
+		"/E/onedrive/Lib_matlab/PeakFinder/license.txt",
+		"/D/chenshen/Downloads/altmany-export_fig-9676767/README.md",
+		"/D/Xiangyun/twowheels/twowheels_rigid_sleeper.k",
+		"/D/Xiangyun/twowheels/sdmodel1_twosheels1.0_im2.rst",
+		"/D/Xiangyun/twowheels/sdmodel1_twosheels1.0_im2.ldhi",
+		"/D/Xiangyun/twowheels/sdmodel1_twosheels1.0_im2.log",
+		"/D/Xiangyun/twowheels/standardmodel1_twowheels1.0_ex2.log",
+		"/E/onedrive/fem/TRACK_v3.0/snst_hammer_mcs.m",
+		"/E/onedrive/Lib_matlab/Global-Sensitivity-Analysis-master/Sen_FirstOrder_Saltelli.m",
+		"/E/onedrive/fem/TRACK_v3.0/snstv_hammer.m",
+		"/E/onedrive/Lib_matlab/shape2dispersion.m",
+		"/E/onedrive/fem/TRACK_v3.0/plt_eig.m",
+		"/E/onedrive/fem/TRACK_v3.0/clean_up.m",
+		"/E/onedrive/Lib_matlab/scriptExtractPassby.m",
+		"/E/onedrive/Lib_matlab/extract_data_passby.m",
+		"/D/MBD_Squats_P1P2/mnf_g302_changing_prf_v31_dyn.adm",
+		"/E/onedrive/Lib_matlab/postprocessing measurement data/generatesnst.m",
+		"/D/Measurement_2503A/Pass-by/PAK data 2016-11-17/Annotation.txt",
+		"/C/Users/chenshen/AppData/Local/Temp/Temp1_load_body.shell.k.zip/load_body.shell.k",
+		"/E/FE/full_track_wheelset/model_half_trk_half_ws/midspan/hammer/chen_bc_slp_sym_cmdsolver_hg6/command.txt",
+		"/E/FE/full_track_wheelset/model_half_trk_half_ws/midspan/hammer/chen_bc_slp_sym_cmdsolver_SR/command.txt",
+		"/E/FE/full_track_wheelset/model_half_trk_half_ws/near_support/B4_regular_bc_slp/command.txt",
+		"/D/Xiangyun/twowheels/twowheels_initial_1/twowheels_initial.k",
+		"/E/FE/full_track_wheelset/model_half_trk_half_ws/midspan/hammer/chen_bc_slp_sym_cmdsolver/command.txt",
+		"/D/Xiangyun/twowheels/twowheels_initial.k",
+		"/E/onedrive/fem/TRACK_v3.0/input/get_input_1.m",
+		"/E/onedrive/fem/TRACK_v3.0/snstv_eig_damped.m",
+		"/E/onedrive/Lib_matlab/Global-Sensitivity-Analysis-master/Sen_TotalEffect_Saltelli.m",
+		"/E/onedrive/Lib_matlab/post_eigLSD.m",
+		"/E/onedrive/fem/TRACK_v3.0/eig2frf.m",
+		"/D/Xiangyun/hammertest/dis_y.dat",
+		"/E/FE/full_track_wheelset/model_half_trk_half_ws/track_full_2/onsup/hammer_trk_slp_E-2_rl_E2_slpmesh3/dis_part7.txt",
+		"/E/FE/full_track_wheelset/model_half_trk_half_ws/track_full/hammer_trk_slp_E-2_rl_E2_slpmesh3/dis_part8.txt",
+		"/E/FE/full_track_wheelset/model_half_trk_half_ws/track_full_2/onsup/hammer_trk_slp_E-2_rl_hr4_0.1_slpmesh3/dis_part7.txt",
+		"/E/onedrive/Lib_matlab/safe_R1.1/example/hymod/hymod_sim.m",
+		"/E/onedrive/Lib_matlab/safe_R1.1/sampling/model_evaluation.m",
+		"/E/onedrive/Lib_matlab/safe_R1.1/example/hymod/LeafCatch.txt",
+		"/E/onedrive/Lib_matlab/safe_R1.1/example/hymod/hymod_nse.m",
+		"/E/onedrive/Lib_matlab/safe_R1.1/licence.txt",
+		"/D/chenshen/Downloads/readme.txt",
+		"/E/onedrive/fem/TRACK_v3.0/solver/solver_static.m",
+		"/E/onedrive/fem/TRACK_v3.0/solver/solver_newmark.m",
+		"/E/onedrive/fem/TRACK_v3.0/matrix/form_shape_fun.m",
+		"/E/onedrive/fem/TRACK_v3.0/solver/solver_newmark_iter.m",
+		"/E/onedrive/Lib_matlab/ansys2modal.m",
+		"/E/onedrive/fem/TRACK_v3.0/ani_rail_vbr.m",
+		"/E/onedrive/Lib_matlab/ani_cplxms.m",
+		"/E/onedrive/Lib_matlab/postprocessing measurement data/FDD.m",
+		"/E/onedrive/fem/TRACK_v3.0/eig_vis.m",
+		"/E/onedrive/fem/TRACK_v3.0/matrix/form_mat_trk_2.m",
+		"/E/onedrive/Lib_matlab/SSMatrix.m",
+		"/E/onedrive/fem/TRACK_v3.0/matrix/form_mat_ws.m",
+		"/E/onedrive/fem/TRACK_v3.0/TRACK_main2.m",
+		"/E/onedrive/fem/TRACK_v3.0/hammer_main.m",
+		"/E/onedrive/fem/TRACK_v3.0/dynamic_main_long_track.m",
+		"/E/onedrive/fem/TRACK_v3.0/matrix/form_elem_mat.m",
+		"/D/TRACK/benchmark_xy/hammer_force.txt",
+		"/E/FE/full_track_hammer_test/midspan/hammer_force.txt",
+		"/E/FE/hammer_test_straight_track/midspan_1/hammer_mid_span_no_load.k",
+		"/C/Programs/MSC.Software/Adams/2017/arail/shared_rail_database.cdb/tracks.tbl/mdi_track_straight_switch_54E1_r1_9.trk",
+		"/O/crossing profile/mdi_track_straight_switch_54E1_r1_9.trk",
+		"/C/Programs/MSC.Software/Adams/2017/arail/shared_rail_database.cdb/wheel_rail_profiles.tbl/rpr_switch/Readme.txt",
+		"/O/crossing profile/mdi_UIC54E1_10.rpr",
+		"/C/Programs/MSC.Software/Adams/2017/arail/shared_rail_database.cdb/wheel_rail_profiles.tbl/mdi_UIC54E1_0.rpr.txt",
+		"/E/onedrive/Documents/PhD cycle/CIE4870/2016/computer_practicum_2/CIE4870_2016/con93.out",
+		"/O/shen0.6/Nforce.dat",
+		"/E/onedrive/Documents/PhD cycle/CIE4870/DocumentsFromNico/shared_rail_database.cdb/flexref_configs.tbl/flextrack001.frp",
+		"/E/onedrive/fem/TRACK_v3.0/snst_time_domain.m",
+		"/E/onedrive/fem/TRACK_v3.0/dynamic_main_snst.m",
+		"/E/onedrive/Lib_matlab/tftb-0.1/refguide/ambifunb.tex",
+		"/E/onedrive/Lib_matlab/ComplexModeToRealMode.m",
+		"/E/onedrive/fem/TRACK_v3.0/tool/plotmdshp.m",
+		"/E/onedrive/fem/TRACK_v3.0/plot_modeShape.m",
+		"/D/Working_sample_coupling/Kik_Piot2.m",
+		"/C/Programs/MSC.Software/Adams/2017/arail/shared_rail_database.cdb/wheel_rail_profiles.tbl/mdi_UIC54E1_100.rpr",
+		"/C/Programs/MSC.Software/Adams/2017/arail/shared_rail_database.cdb/tracks.tbl/mdi_track_straight_switch_54E1_1_9.trk",
+		"/C/Programs/MSC.Software/Adams/2017/arail/shared_rail_database.cdb/tracks.tbl/mdi_track_curve.trk",
+		"/C/Programs/MSC.Software/Adams/2017/arail/shared_rail_database.cdb/wheel_rail_profiles.tbl/mdi_UIC60.rpr",
+		"/C/Programs/MSC.Software/Adams/2017/arail/shared_rail_database.cdb/wheel_rail_profiles.tbl/mdi_UIC54E1_0.rpr",
+		"/C/Programs/MSC.Software/Adams/2017/arail/shared_rail_database.cdb/wheel_rail_profiles.tbl/mdi_UIC60_150.rpr",
+		"/C/Users/chenshen/AppData/Local/Temp/Temp1_contact_ellipse_calculator (1).zip/license.txt",
+		"/E/onedrive/fem/TRACK_v3.0/lib/NshapeTimo.m",
+		"/E/onedrive/fem/TRACK_v3.0/benchmark/KMmatrixTiPoly.m",
+		"/E/onedrive/Lib_matlab/postprocessing measurement data/tran_fun.m",
+		"/E/onedrive/fem/TRACK_v3.0/symbolic_stiffness_matrix.m",
+		"/E/onedrive/fem/TRACK_v3.0/geo/mesh_trk_full.m",
+		"/E/onedrive/fem/TRACK_v3.0/contact/winkler_bedding.m",
+		"/E/onedrive/fem/TRACK_v3.0/input/get_input_2.m",
+		"/E/onedrive/fem/TRACK_v3.0/lib/timoshenko_beam.m",
+		"/E/onedrive/fem/TRACK_v3.0/input/formStiffnessMassTimoshenkoBeam.m",
+		"/E/onedrive/fem/TRACK_v3.0/input/shapeFunctionL2.m",
+		"/E/onedrive/fem/TRACK_v3.0/dynamic_main.m",
+		"/E/onedrive/fem/TRACK_v3.0/input/get_input_3.m",
+		"/E/onedrive/fem/TRACK_v3.0/symbolic_stiffness_matrix",
+		"/E/onedrive/Lib_matlab/commandLine.m",
+		"/D/Romania_Oct_2017_backup/computePersisSpec.m",
+		"/E/onedrive/Lib_matlab/index.html",
+		"/E/onedrive/Lib_matlab/pltwsst.m",
+		"/E/onedrive/Lib_matlab/bandpass.m",
+		"/D/Measurement_2503A/ABA/20151215_ground/Annotation.txt",
+		"/D/Romania_Oct_2017_backup/scriptExtractPassby.m",
+		"/D/Measurement_2503A/Pass-by/20181024/Annotation.txt",
+		"/E/onedrive/Lib_matlab/tftb-0.1/mfiles/tfrridh.m",
+		"/C/Program Files/MATLAB/R2017b/toolbox/wavelet/wavelet/wsst.m",
+		"/H/Application data/Sublime Text 3/Packages/User/Matlab.sublime-settings",
+		"/E/onedrive/Lib_matlab/test.m"
+	],
+	"find":
+	{
+		"height": 40.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"*",
+			"out",
+			"outp",
+			"mass",
+			"load",
+			"LElem",
+			"t",
+			"sigVert_15_ROI",
+			"plot",
+			"trange",
+			"functionname",
+			"zeros",
+			"plot",
+			"hold",
+			"figure",
+			"plot",
+			"disp",
+			"\n\t",
+			"    \n",
+			"    ",
+			"mat_ws",
+			"zdd",
+			"form",
+			"out",
+			"175922",
+			"175911",
+			"175912",
+			"mat",
+			"hour",
+			"mat",
+			"con",
+			"sec",
+			"load",
+			"sec",
+			"$",
+			"sec",
+			"contr",
+			"sec",
+			"$",
+			"cont",
+			"hour",
+			"his",
+			"damp",
+			"mat",
+			"load",
+			"sec",
+			"damp",
+			"load",
+			"mat",
+			"$",
+			"mat",
+			"control",
+			"hour",
+			"cou",
+			"dam",
+			"damp",
+			"mat",
+			"load",
+			"\t",
+			"mat",
+			"sec",
+			"ho",
+			"hou",
+			"sec",
+			"hou",
+			"sec",
+			"hou",
+			"sec",
+			"hou",
+			"sec",
+			"hour",
+			"hou",
+			"sec",
+			"mat",
+			"bou",
+			"mat",
+			"sec",
+			"element",
+			"sec",
+			"data",
+			"mat",
+			"cont",
+			"$",
+			"out",
+			"*DATABASE",
+			"*HOUR",
+			"*hour",
+			"*SECTION_SOLID",
+			"ELEMENT_SOLID",
+			"mat",
+			"out",
+			"load",
+			"mat",
+			"MyNodeNoArray",
+			"RECORD=       7",
+			"RECORD=     108",
+			"RECORD",
+			"125904",
+			"-0.141",
+			"0.141",
+			"26.7",
+			"hour",
+			"mat",
+			"mat\\",
+			"mat",
+			"conta",
+			"curve",
+			"load",
+			"time",
+			"1.668",
+			"mate",
+			"hour",
+			"mat",
+			"hour",
+			"mat",
+			"hour",
+			"mat",
+			"contr",
+			"stiff",
+			"contr",
+			"cont",
+			"mat",
+			"control",
+			"mat",
+			"hour",
+			"mat",
+			"hour",
+			"mat"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"  ",
+			"outtab",
+			" ",
+			"  ",
+			" ",
+			"  "
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "geo/mesh_trk_full.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3745,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								650,
+								650
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1322.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 19,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "snst_hammer_Saltelli.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2128,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								402,
+								402
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 18,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "matrix/form_mat_trk.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5006,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4885,
+								4888
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "dynamic_main.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6300,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								283,
+								283
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"history_list_is_closing": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "snst_time_domain.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1439,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1052,
+								1052
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 267.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 16,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "snst_time_domain_mcs.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3126,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1573,
+								1573
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 669.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/E/onedrive/Lib_matlab/cutsig.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 250,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "eig2frf.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 769,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								280,
+								280
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "snst_maxF_dynamic_model.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 802,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								589,
+								589
+							]
+						],
+						"settings":
+						{
+							"auto_name": "function []",
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "snstv_eig_damped.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1336,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								707,
+								707
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"history_list_is_closing": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "/E/onedrive/Lib_matlab/shape2dispersion.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 512,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								133,
+								133
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 23,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "eig_vis.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 536,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								487,
+								487
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "plt_eig.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 470,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								312,
+								312
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 14,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "plot_modeShape.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 353,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								349,
+								349
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "hammer_main_snst_mcs.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1775,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								460,
+								460
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 22,
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"file": "/E/onedrive/Lib_matlab/postprocessing measurement data/tran_fun.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1023,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								735,
+								780
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 21,
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"file": "hammer_main.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1886,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								480,
+								480
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 20,
+					"type": "text"
+				},
+				{
+					"buffer": 17,
+					"file": "solver/solver_newmark.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2746,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1595,
+								1595
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 57.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 24,
+					"type": "text"
+				},
+				{
+					"buffer": 18,
+					"file": "dynamic_main_snst_mcs.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4905,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								726,
+								726
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 19,
+					"file": "matrix/form_mat_ws.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 154,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								144,
+								144
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 27,
+					"type": "text"
+				},
+				{
+					"buffer": 20,
+					"file": "dynamic_main_snst.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4812,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								412,
+								412
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"history_list_is_closing": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 17,
+					"type": "text"
+				},
+				{
+					"buffer": 21,
+					"file": "snst_time_domain_long_track.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1531,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								548,
+								548
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 285.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 22,
+					"file": "snst_hammer_mcs.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2770,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2052,
+								2052
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"history_list_is_closing": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 823.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 15,
+					"type": "text"
+				},
+				{
+					"buffer": 17,
+					"file": "solver/solver_newmark.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2746,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								373,
+								373
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 30.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 26,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "dynamic_main.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6300,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3522,
+								3522
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"history_list_is_closing": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1026.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 23,
+					"file": "/C/Programs/MSC.Software/Adams/2017/arail/shared_rail_database.cdb/wheel_rail_profiles.tbl/mdi_UIC60.rpr",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1457,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								597,
+								1456
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 24,
+					"file": "input/get_input_4.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5111,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2806,
+								2806
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 780.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 25,
+					"file": "matrix/form_shape_fun2.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1714,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								310,
+								310
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"history_list_is_closing": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 25,
+					"type": "text"
+				},
+				{
+					"buffer": 26,
+					"file": "lib/Nshape.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1771,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								705,
+								705
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 171.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 28,
+					"type": "text"
+				},
+				{
+					"buffer": 27,
+					"file": "input/get_input_3.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4482,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								156,
+								156
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 30,
+					"type": "text"
+				},
+				{
+					"buffer": 0,
+					"file": "geo/mesh_trk_full.m",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3745,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2609,
+								2618
+							]
+						],
+						"settings":
+						{
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/Matlab/Matlab.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 267.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 29,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 40.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				2
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			],
+			[
+				1,
+				1,
+				2,
+				2
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.517513938073,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			0.921268749777,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 132.0
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 132.0
+	},
+	"pinned_build_system": "",
+	"project": "TRACK_V3.0.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"wavel",
+				"Lib_matlab\\plotwavelet.m"
+			],
+			[
+				"wave",
+				"Romania_Oct_2017_backup\\pltWavelet.m"
+			],
+			[
+				"cut",
+				"Lib_matlab\\cutsig.m"
+			],
+			[
+				"read",
+				"Lib_matlab\\readANSYSModeFile2.m"
+			],
+			[
+				"snst_time",
+				"TRACK_v3.0\\snst_time_domain_mcs.m"
+			],
+			[
+				"dyn",
+				"TRACK_v3.0\\dynamic_main_snst.m"
+			],
+			[
+				"mesh",
+				"TRACK_v3.0\\geo\\mesh_trk_full.m"
+			],
+			[
+				"dy",
+				"TRACK_v3.0\\dynamic_main.m"
+			],
+			[
+				"comm",
+				"E:\\FE\\full_track_wheelset\\model_half_trk_half_ws\\on_support\\hammer\\regular_bc_slp_E80\\command.txt"
+			],
+			[
+				"hammer",
+				"TRACK_v3.0\\hammer_main_snst_mcs.m"
+			],
+			[
+				"snst",
+				"TRACK_v3.0\\snst_hammer_mcs.m"
+			],
+			[
+				"mcs",
+				"TRACK_v3.0\\snst_time_domain_mcs.m"
+			],
+			[
+				"hamm",
+				"TRACK_v3.0\\hammer_main.m"
+			],
+			[
+				"pl",
+				"TRACK_v3.0\\plt_eig.m"
+			],
+			[
+				"eig",
+				"TRACK_v3.0\\plt_eig.m"
+			],
+			[
+				"cle",
+				"TRACK_v3.0\\clean_up.m"
+			],
+			[
+				"",
+				"TRACK_v3.0\\hammer_main.m"
+			],
+			[
+				"form",
+				"TRACK_v3.0\\matrix\\form_mat_trk.m"
+			],
+			[
+				"extra",
+				"Lib_matlab\\scriptExtractPassby.m"
+			],
+			[
+				"d",
+				"TRACK_v3.0\\dynamic_main.m"
+			],
+			[
+				"sns",
+				"TRACK_v3.0\\snstv_eig_damped.m"
+			],
+			[
+				"hymod_sim",
+				"Lib_matlab\\safe_R1.1\\example\\hymod\\hymod_sim.m"
+			],
+			[
+				"LeafCatch",
+				"Lib_matlab\\safe_R1.1\\example\\hymod\\LeafCatch.txt"
+			],
+			[
+				"hymod_nse",
+				"Lib_matlab\\safe_R1.1\\example\\hymod\\hymod_nse.m"
+			],
+			[
+				"model",
+				"Lib_matlab\\safe_R1.1\\sampling\\model_evaluation.m"
+			],
+			[
+				"se",
+				"TRACK_v3.0\\snstv_eig_damped.m"
+			],
+			[
+				"track",
+				"TRACK_v3.0\\TRACK_main2.m"
+			],
+			[
+				"frame",
+				"Lib_matlab\\tftb-0.1\\refguide\\ambifunb.tex"
+			],
+			[
+				"ani",
+				"TRACK_v3.0\\ani_rail_vbr.m"
+			],
+			[
+				"complex",
+				"Lib_matlab\\ComplexModeToRealMode.m"
+			],
+			[
+				"plot",
+				"TRACK_v3.0\\tool\\plotmdshp.m"
+			],
+			[
+				"fdd",
+				"Lib_matlab\\postprocessing measurement data\\FDD.m"
+			],
+			[
+				"pass",
+				"Lib_matlab\\extract_data_passby.m"
+			],
+			[
+				"form_shape",
+				"TRACK_v3.0\\matrix\\form_shape_fun.m"
+			],
+			[
+				"timo",
+				"TRACK_v3.0\\lib\\timoshenko_beam.m"
+			],
+			[
+				"for",
+				"TRACK_v3.0\\matrix\\form_shape_fun.m"
+			],
+			[
+				"get",
+				"TRACK_v3.0\\input\\get_input_3.m"
+			],
+			[
+				"Nsh",
+				"TRACK_v3.0\\lib\\NshapeTimo.m"
+			],
+			[
+				"shape",
+				"TRACK_v3.0\\input\\shapeFunctionL2.m"
+			],
+			[
+				"formSt",
+				"TRACK_v3.0\\input\\formStiffnessMassTimoshenkoBeam.m"
+			],
+			[
+				"km",
+				"TRACK_v3.0\\benchmark\\KMmatrixTiPoly.m"
+			],
+			[
+				"winkl",
+				"TRACK_v3.0\\contact\\winkler_bedding.m"
+			],
+			[
+				"sy",
+				"TRACK_v3.0\\symbolic_stiffness_matrix.m"
+			],
+			[
+				"trac",
+				"TRACK_v3.0\\TRACK_main2.m"
+			],
+			[
+				"KM",
+				"TRACK_v3.0\\benchmark\\KMmatrixTiPoly.m"
+			],
+			[
+				"ne",
+				"TRACK_v3.0\\solver\\solver_newmark.m"
+			],
+			[
+				"tfrridh",
+				"Lib_matlab\\tftb-0.1\\mfiles\\tfrridh.m"
+			],
+			[
+				"scr",
+				"Romania_Oct_2017_backup\\scriptExtractPassby.m"
+			],
+			[
+				"comput",
+				"Romania_Oct_2017_backup\\computePersisSpec.m"
+			],
+			[
+				"plt",
+				"Lib_matlab\\pltwsst.m"
+			],
+			[
+				"pltw",
+				"Romania_Oct_2017_backup\\pltWavelet.m"
+			],
+			[
+				"wsst",
+				"toolbox\\wavelet\\wavelet\\wsst.m"
+			],
+			[
+				"gene",
+				"Lib_matlab\\postprocessing measurement data\\generatesnst.m"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"last_filter": "gen",
+		"selected_items":
+		[
+			[
+				"gen",
+				"generatesnst"
+			]
+		],
+		"width": 592.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+		"last_automatic_layout":
+		[
+			[
+				0,
+				0,
+				1,
+				2
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			],
+			[
+				1,
+				1,
+				2,
+				2
+			]
+		]
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 203.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+		"max_columns": 2
+	}
+}

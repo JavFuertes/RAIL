@@ -1,0 +1,104 @@
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % Local sensitivity analysis time domain
+% % 
+% % Author: Chen Shen
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+clear
+%%
+filename=['snst_dynamic_local.mat'];
+[inp,NNslpf] = get_input_4();
+[nodeCoord] = node_coor(inp);
+btypr = inp.mesh.btypr;
+btyps = inp.mesh.btyps;
+[geo] = mesh_trk_full(btypr,btyps,nodeCoord);
+mat_ws=form_mat_ws(inp);
+% refval = [210e9;7.0515e-3;74.6e9;0.043;1.3e9;6.75e4;9e7/NNslpf;6.4e4/NNslpf];
+% setnum = [1,1;1,3;2,1;2,3;3,1;3,2;4,1;4,2];
+% setnumC1 = setnum(:,1);
+% setnumC2 = setnum(:,2);
+% S = struct('F',zeros(1001,2)); % Results
+
+setnum = [1,1;1,3;2,1;2,3;3,1;3,2;4,1;4,2];
+
+refval =   [5.02e6;      % Rail EI
+            56;          % Rail rhoA
+            1.03e7;      % Sleeper EI
+            1.08e2;      % Sleeper rhoA
+            1.3e9;       % Railpad Stiffness 1e8,1.5e9;
+            6.75e4;      % Railpad damping
+            9e7/NNslpf;  % Ballast stiffness
+            6.4e4/NNslpf;% Ballast damping
+            30e-3;         % Defect length
+            5e-4];       % Defect depth
+railpadstiff = [1e8:1e8:1.3e9]';
+defectLength = [10e-3:10e-3:100e-3]';
+%defectDepth = [5e-4;10e-4;]
+
+
+setnumC1 = setnum(:,1);
+setnumC2 = setnum(:,2);
+Nref = length(railpadstiff)*length(defectLength); %number of ref samples
+nPara = 10;
+
+
+%% Generate random inputs
+
+randInp = zeros(Nref,nPara);
+nsample = 1;
+for ii = 1:length(railpadstiff)
+    for jj = 1:length(defectLength)
+        refval(5) = railpadstiff(ii);
+        refval(9) = defectLength(jj);
+        randInp(nsample,:) = refval';
+        nsample = nsample + 1;
+    end
+end
+
+randInp_rpstiff = randInp;
+randInp_rpstiff(:,5) = randInp_rpstiff(:,5).*0.9;
+randInp_defLength = randInp;
+randInp_defLength(:,9) = randInp_defLength(:,9).*0.9;
+randInp = [randInp;randInp_rpstiff;randInp_defLength]; 
+% % Disable when considering irr geometry as varibles
+%     irr_depth=0.2e-3;
+%     irr_length=30e-3;
+%     %
+
+%% Start MCS
+N = size(randInp,1);
+S1 =zeros(inp.solver.n_ts+1,N); % Results
+S2 =zeros(inp.solver.n_ts+1,N);
+parfor nsim = 1:N
+    inpOne = inp;
+    for npara = 1:8
+        nmat = setnumC1(npara);
+        ndata = setnumC2(npara);
+        if nmat < 3
+        inpOne.mater(nmat).Data(ndata)= randInp(nsim,npara)./inpOne.mater(nmat).Data(ndata+1);
+    else
+        inpOne.mater(nmat).Data(ndata)= randInp(nsim,npara);
+        end
+    end
+    inpOne.mater(1).Data(5)=inpOne.mater(1).Data(1)/(2*(1+0.3));
+    inpOne.mater(2).Data(5)=inpOne.mater(2).Data(1)/(2*(1+0.17));
+    % Enable when considering irr geometry as varibles
+    irr_depth=randInp(nsim,9);
+    irr_length=randInp(nsim,10);
+    %
+    
+    mat_trk = form_mat_trk_2(inpOne,geo);
+    
+    F = dynamic_main_snst_mcs(inpOne,mat_trk,geo,mat_ws,irr_depth,irr_length);
+    
+    S1(:,nsim)=F(:,1);
+    S2(:,nsim)=F(:,2);
+    %S(npara).dis=[dis_out,dis.w];
+    %S(npara).vel=[vel_out,vel.w];
+    %S(npara).acc=[acc_out,acc.w];
+    
+    disp (['Simulation No. ',num2str(nsim),' finished. Time: ' datestr(now)]);
+end
+
+    save (filename)%, 'geo', 'inp', 'refval', 'randInp', 'S1');
+
