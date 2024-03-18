@@ -18,7 +18,7 @@ Railway has become an increasingly popular transportation mode all over the worl
 
 5. *Stratified Material* or Formation is the prepared flat surface, which is ready to receive the ballast, along with sleepers and rails. The formation supports the entire track structure. It bears the load transmitted to it from the ballast. And facilitates drainage while providing overall stability to the track. 
 
-| ![Figure 1](_alt/Figures/Figure_1.png)|
+| ![Figure 1](_Alt/Figures/Figure_1.png)|
 |----------------------------------------|
 |**Figure 1 & 2:** Typical arrangement of a railway track & a hammer test on a railway track. | 
 
@@ -35,7 +35,7 @@ This study makes use of a 3D finite element model, as shown in <b>Figure 3</b>. 
 
 </blockquote>
 
-| ![Figure 3](_alt/Figures/Figure_3.png)|
+| ![Figure 3](_Alt/Figures/Figure_3.png)|
 |----------------------------------------|
 |**Figure 3:** Mechanical scheme of the Finite element model. | 
 
