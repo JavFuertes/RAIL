@@ -1,36 +1,12 @@
 # Algorithmic structural health monitoring of railway infrastructure
 
-<figure>
-  <img style="position:absolute; left: 60%;height: 600px;object-fit:cover;clip-path: inset(0px 50px 00px 50px round 10px);" src="https://cdnstorevoestalpine.blob.core.windows.net/images/815857/Open_CMS_Lightbox/roadmaster-visualisation.jpg" width="40%"  />
-</figure>
 
 ### Background
-<p style="text-align:justify; width:60%;">
 Railway has become an increasingly popular transportation mode all over the world. In the Netherlands, the railway network reaches up to 3223 km in total and transports millions of passengers and million tonnes of freight every year. In recent decades, the Dutch railway keeps evolving to be safer, faster, and greener to become more competitive with air and road transport. The condition of railway tracks affects the safety, ride comfort, and sustainability of train operations. To achieve this goal, the health condition of railway tracks needs to be timely and properly maintained.
-</p>
 
-<p style="text-align:justify; width:60%;">
-<b>Figure 2</b> shows a typical modern railway track structure. The rails are fixed on the sleepers by fasteners (consisting of rail pads and clamps). Rail pads are made of resilient material. The ballast layer also provides elasticity for the track structure. The stiffness of these two components determines the overall track stiffness. In practice, track stiffness can be measured by a non-destructive hammer test, as shown in <b>Figure 2</b>. The rail head is excited with a hammer, and the dynamic response (usually acceleration) is measured at the location of interest. Then, the input force and output accelerations are used to calculate a frequency response function (FRF), from which the track stiffness can be identified.
-</p>
+![Smart railway infrastructure](https://cdnstorevoestalpine.blob.core.windows.net/images/815857/Open_CMS_Lightbox/roadmaster-visualisation.jpg)
 
-### Details
-
-<p style="text-align:justify; width:60%;">
-This study makes use of a 3D finite element model, as shown in <b>Figure 1</b>. The total length of the track model is 12 m with 20 sleeper spans. The rail and sleepers are meshed with Timoshenko beam elements. The fasteners are modelled using the Kelvin-Voigt (KV) model with an elastic spring and viscous damper connected in parallel. The ballast layer is modelled as discretely distributed KV models under each sleeper node. The elastic spring elements in KV models are derived from the stiffness property of fasteners and ballast layer. Accordingly, the viscous dampers represent the damping effects of the fasteners and ballast layer.
-</p>
-
-<blockquote style="width: 60%;">
-
-**Project Objective:** To firstly perform an investigation into the response and behaviour of multiple railway samples and determine if we can remotely monitor the structural condition of railway infrastructure through its response to excitation. And in the second place, to develop an algorithmic approach to determine the condition of railway infrastructure at different locations.
-
-</blockquote>
-
-| ![Figure 3](一Alt/Figures/Figure_3.png)|
-|----------------------------------------|
-|**Figure 1:** Mechanical scheme of the Finite element model. | 
-
-
-A Ballasted Track is composed of rails, sleepers, railpads, ballast material and stratified material.
+**Figure 2** shows a typical modern railway track structure. The rails are fixed on the sleepers by fasteners (consisting of rail pads and clamps). Rail pads are made of resilient material. The ballast layer also provides elasticity for the track structure. The stiffness of these two components determines the overall track stiffness. In practice, track stiffness can be measured by a non-destructive hammer test, as shown in **Figure 2**. The rail head is excited with a hammer, and the dynamic response (usually acceleration) is measured at the location of interest. Then, the input force and output accelerations are used to calculate a frequency response function (FRF), from which the track stiffness can be identified. The main components of this structure are,
 
 1. *Rail* are the members of the track laid in two parallel lines to provide an unchanging, continuous, and level surface for the movement of trains. They are made of high-carbon steel. Rails provide a pathway which is smooth and has very little friction and act as a lateral guide for the wheels. They bear the stresses developed due to vertical loads transmitted to them by the axles and wheels of rolling stock as well as due to braking and thermal forces. They transmit the load to a large area of the formation through sleepers and the ballast.
 
@@ -46,31 +22,23 @@ A Ballasted Track is composed of rails, sleepers, railpads, ballast material and
 |----------------------------------------|
 |**Figure 1 & 2:** Typical arrangement of a railway track & a hammer test on a railway track. | 
 
-We start with an initial truss in Pratt arrangement with **27 cross sections and 37 elements**. Through engineering judgement in structural mechanics we can employ symmetry and forego the lower cord to reduce this problem from **64 dimensions to 19 dimensions** and therefore solve the curse of dimensionality. The problem formulation is the following, 
 
-$$
-OF = \min_{\theta, \gamma} E[P_{\text{data}}(L(\gamma, \theta))] \quad (1)
-$$
+### Details
 
-$$
-\text{with solution space:} 
-\begin{pmatrix}
-f(\theta_1, \gamma_1) & f(\theta_1, \gamma_2) & \cdots & f(\theta_1, \gamma_{14}) \\
-\vdots  & \vdots  & \ddots  & \vdots \\
-f(\theta_5, \gamma_1) & f(\theta_5, \gamma_2) & \cdots & f(\theta_5, \gamma_{14})
-\end{pmatrix} \quad \text{(2)}
-$$
+<p style="text-align:justify; width:60%;">
+This study makes use of a 3D finite element model, as shown in <b>Figure 3</b>. The total length of the track model is 12 m with 20 sleeper spans. The rail and sleepers are meshed with Timoshenko beam elements. The fasteners are modelled using the Kelvin-Voigt (KV) model with an elastic spring and viscous damper connected in parallel. The ballast layer is modelled as discretely distributed KV models under each sleeper node. The elastic spring elements in KV models are derived from the stiffness property of fasteners and ballast layer. Accordingly, the viscous dampers represent the damping effects of the fasteners and ballast layer.
+</p>
 
-$$
-\text{subject to constraints} \quad \left\{
-\begin{array}{l}
-\omega_1 \geq 20, \\
-\omega_2 \geq 40, \quad \text{and} \quad A_{1-15} > 0 \\
-\omega_3 \geq 60, \\
-\end{array} \right. \quad \text{(3)}
-$$
+<blockquote style="width: 60%;">
 
-Solving the above problem requires the use of gradient based methods which we build on top our Machine learning model supported by different functions to facilitate the exploration and learning of the solution space. The before approach serves to illustrate the efficacy of expanding current optimization methods and through implementation of machine learning methods and how we can improve the convergence speed and problem complexity of possible problems. 
+**Project Objective:** To firstly perform an investigation into the response and behaviour of multiple railway samples and determine if we can remotely monitor the structural condition of railway infrastructure through its response to excitation. And in the second place, to develop an algorithmic approach to determine the condition of railway infrastructure at different locations.
+
+</blockquote>
+
+| ![Figure 3](一Alt/Figures/Figure_3.png)|
+|----------------------------------------|
+|**Figure 3:** Mechanical scheme of the Finite element model. | 
+
 
 ## Breakdown of the Bayesian Optimization analysis
 
