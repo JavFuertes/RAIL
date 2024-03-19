@@ -6,7 +6,9 @@ Railway has become an increasingly popular transportation mode all over the worl
 
 ![Smart railway infrastructure](https://cdnstorevoestalpine.blob.core.windows.net/images/815857/Open_CMS_Lightbox/roadmaster-visualisation.jpg)
 
-**Figure 2** shows a typical modern railway track structure. The rails are fixed on the sleepers by fasteners (consisting of rail pads and clamps). Rail pads are made of resilient material. The ballast layer also provides elasticity for the track structure. The stiffness of these two components determines the overall track stiffness. In practice, track stiffness can be measured by a non-destructive hammer test, as shown in **Figure 2**. The rail head is excited with a hammer, and the dynamic response (usually acceleration) is measured at the location of interest. Then, the input force and output accelerations are used to calculate a frequency response function (FRF), from which the track stiffness can be identified. The main components of this structure are,
+**Figure 2** shows a typical modern railway track structure. The rails are fixed on the sleepers by fasteners (consisting of rail pads and clamps). Rail pads are made of resilient material. The ballast layer also provides elasticity for the track structure. The stiffness of these two components determines the overall track stiffness. In practice, track stiffness can be measured by a non-destructive hammer test, as shown in **Figure 2**. The rail head is excited with a hammer, and the dynamic response (usually acceleration) is measured at the location of interest. Then, the input force and output accelerations are used to calculate a frequency response function (FRF), from which the track stiffness can be identified. 
+
+The main components which contribute to the track stiffness are,
 
 1. *Rail* are the members of the track laid in two parallel lines to provide an unchanging, continuous, and level surface for the movement of trains. They are made of high-carbon steel. Rails provide a pathway which is smooth and has very little friction and act as a lateral guide for the wheels. They bear the stresses developed due to vertical loads transmitted to them by the axles and wheels of rolling stock as well as due to braking and thermal forces. They transmit the load to a large area of the formation through sleepers and the ballast.
 
@@ -25,11 +27,9 @@ Railway has become an increasingly popular transportation mode all over the worl
 
 ### Details
 
-<p style="text-align:justify; width:60%;">
 This study makes use of a 3D finite element model, as shown in <b>Figure 3</b>. The total length of the track model is 12 m with 20 sleeper spans. The rail and sleepers are meshed with Timoshenko beam elements. The fasteners are modelled using the Kelvin-Voigt (KV) model with an elastic spring and viscous damper connected in parallel. The ballast layer is modelled as discretely distributed KV models under each sleeper node. The elastic spring elements in KV models are derived from the stiffness property of fasteners and ballast layer. Accordingly, the viscous dampers represent the damping effects of the fasteners and ballast layer.
-</p>
 
-<blockquote style="width: 60%;">
+<blockquote>
 
 **Project Objective:** To firstly perform an investigation into the response and behaviour of multiple railway samples and determine if we can remotely monitor the structural condition of railway infrastructure through its response to excitation. And in the second place, to develop an algorithmic approach to determine the condition of railway infrastructure at different locations.
 
@@ -39,12 +39,11 @@ This study makes use of a 3D finite element model, as shown in <b>Figure 3</b>. 
 |----------------------------------------|
 |**Figure 3:** Mechanical scheme of the Finite element model. | 
 
-
-## Breakdown of the Bayesian Optimization analysis
+## A breakdown of the investigation and algorithm structure 
 
 The solution method employed in the Bayesian optimizer involves several key steps and tackling several key issues such as how to be able to manage constraints not related to our input vector and many user-defined choices and values such as building a loss function robust enough which allows the gaussian process to learn the solution space. How these issues where tackled is explained in the following steps. 
 
-### 1. Algorithm Initiation
+### 1. Track stiffness monitoring investigation
 
 We initiate a random search in the solution space by taking n random samples from the solution space. To do so we first constrain our solution space by defining our **bounds** to exploration locations which may produce sensical values and hence not throw off the algorithm excessively when searching. And then compute the losses at these n random locations. A condensed version of the loss function is as follows,
 
@@ -88,38 +87,7 @@ The loss is finally computed by multiplying the the normalised **mass** and **fr
 
 We then **normalise** our data through `MinMaxscaler` for the contributions of the coordinates and and areas to be of equal weight despite unequal magnitudes. We then initiate the other hyperparameters of the `TRUSS` object, this includes the loss function components such as the violation factor and corresponding weights of the mass and frequency components of the loss function which if well formulated should evaluate the proximity to a optimal solution.
 
-The following shows the initiation of the random search,
-```python
-for _ in range(n_samples):
-    x_c = np.copy(x_0) # Reset seed
-    x_random = TRUSS1.Initial_guess(optim_dims)
-    x_c[optim_dims] = x_random
-    x_list.append(x_c)
- 
-trap = io.StringIO()
-with redirect_stdout(trap):
-    for x in x_list:
-        LOSS = TRUSS1.loss_function(x)
-        y_list.append(LOSS)
-```
-
-### 2. Gaussian process characteristics & fitting
-
-We then fit the initiated n-vectors with the calculated n targets to a single task Gaussian process `SingleTaskGP` through the `set_train_data` function. This Gaussian process makes use by default use of a Matern kernel although this can be changed through the `covar_module` since the use of Matern kernel is of interest to us this was left unchanged. The Matern kernel can be expressed in the following way,
-
-$$
-k(\mathbf{x}, \mathbf{x'}) = \frac{\sigma_{f}^2}{\Gamma(\nu)2^{\nu-1}} \left(1 + \frac{\left\| \sqrt{2\nu}d/\ell \right\|^2}{\nu}\right)^{-\nu}K_{\nu}\left(\sqrt{2\nu}d/\ell\right)
-$$ 
-
-Additionally, we then set the `SingleTaskGP` loss evaluation through the `ExactMarginalLogLikelihood`, 
-
-$$
-\mathcal{L} = p_f(\mathbf{y} | \mathbf{X}) = \int p \left( \mathbf{y} | f(\mathbf{X}) \right) \cdot p(f(\mathbf{X}) | \mathbf{X}) \, df \quad \text{(3)}
-$$
-
->**NOTE**: The decision to use a single task gp was a decision to simplify the problem through accounting the different components of the loss function through additional hyperparameters (i.e the NF and mass component weights of the loss function) nevertheless, it could be interesting to explore the use multi-task GP's.
-
-### 3. The algorithm process 
+### 2. The detection algorithm 
 
 We now initiate the optimiser algorithm, this is done by iteratively try to minimise the loss through gradient based methods `optimize_acqf` which is guided by our acquisition function, in this case the `Expectedimprovement` function which can be expressed as follows,
 
@@ -205,7 +173,6 @@ The solution to the yielded the following graph,
 **Figure 7:** TRUSS convergence study. 
 
  
-
 ## Repo structure and contents
 - 口Reading includes the original paper and reference, investigation and reference results obtained with other optimization approaches, check this paper: [Kanarachos et al., 2017](https://dx.doi.org/10.1016/j.compstruc.2016.11.005)
 - **pyJive**: a finite element code that can compute the natural frequencies of a given truss design, which can be treated as black box model for this project
@@ -216,7 +183,3 @@ The solution to the yielded the following graph,
 ### Useful links
 The original publication:
 - Approach undertaken by Kanarachos through a pure optimisation approach, check this paper for the publication: [https://dx.doi.org/10.1016/j.compstruc.2016.11.005](https://dx.doi.org/10.1016/j.compstruc.2016.11.005)
-
-Tutorials on Bayesian optimization:
-- [https://towardsdatascience.com/bayesian-optimization-a-step-by-step-approach-a1cb678dd2ec](https://towardsdatascience.com/bayesian-optimization-a-step-by-step-approach-a1cb678dd2ec)
-- [https://www.ritchievink.com/blog/2019/08/25/algorithm-breakdown-bayesian-optimization](https://www.ritchievink.com/blog/2019/08/25/algorithm-breakdown-bayesian-optimization)
