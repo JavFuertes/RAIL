@@ -237,6 +237,7 @@ PR_1 & \approx \left(1 - \frac{1}{2} \left(1 + \text{erf}\left(\frac{5.5 \times 
 \text{Sample 1 percentile} & \approx 58.9\%
 \end{aligned}
 $$
+
 $$
 \begin{aligned}
 PR_2 & \approx \left(1 - \frac{1}{2} \left(1 + \text{erf}\left(\frac{4.75 \times 10^8 - 7.56 \times 10^8}{3.22 \times 10^8 \times \sqrt{2}}\right)\right)\right) \times 100 >\\
@@ -244,6 +245,7 @@ PR_2 & \approx \left(1 - \frac{1}{2} \left(1 + \text{erf}\left(\frac{4.75 \times
 \text{Sample 2 percentile} & \approx 63.3\%
 \end{aligned}
 $$
+
 Evaluating the **Ballast stiffness** samples through a lognormal disitribution with parameters from **TABLE 1** with as well not presented but evaluated kurtosis parameter of 0.2443 we obtain,
 
 $$
@@ -252,6 +254,7 @@ PR_1 \approx \left(1 - \text{erf}\left(\frac{\ln(8 \times 10^7) - 5.97 \times 10
 \text{Sample 1 percentile} & \approx 0\%
 \end{aligned}
 $$
+
 $$
 \begin{aligned}
 PR_2 \approx \left(1 - \text{erf}\left(\frac{\ln(6 \times 10^7) - 5.97 \times 10^8}{\sqrt{2} \times 2.935 \times 10^8}\right)\right) \times 100 \\
