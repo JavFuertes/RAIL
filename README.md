@@ -1,6 +1,5 @@
 # Algorithmic structural health monitoring of railway infrastructure
 
-
 ### Background
 Railway has become an increasingly popular transportation mode all over the world. In the Netherlands, the railway network reaches up to 3223 km in total and transports millions of passengers and million tonnes of freight every year. In recent decades, the Dutch railway keeps evolving to be safer, faster, and greener to become more competitive with air and road transport. The condition of railway tracks affects the safety, ride comfort, and sustainability of train operations. To achieve this goal, the health condition of railway tracks needs to be timely and properly maintained.
 
@@ -35,151 +34,239 @@ This study makes use of a 3D finite element model, as shown in <b>Figure 3</b>. 
 
 </blockquote>
 
-| ![Figure 3](_Alt/Figures/Figure_3.png)|
-|----------------------------------------|
-|**Figure 3:** Mechanical scheme of the Finite element model. | 
+![Figure 3](_Alt/Figures/Figure_3.png)
 
-## A breakdown of the investigation and algorithm structure 
+**Figure 3:** Mechanical scheme of the Finite element model. 
 
-The solution method employed in the Bayesian optimizer involves several key steps and tackling several key issues such as how to be able to manage constraints not related to our input vector and many user-defined choices and values such as building a loss function robust enough which allows the gaussian process to learn the solution space. How these issues where tackled is explained in the following steps. 
+## 1. A breakdown of the investigation and algorithm structure
 
-### 1. Track stiffness monitoring investigation
+We firstly begin by understanding and plotting the lab data two hammer tests where conducted on the same sample and the FRF was also measured. Therefore we first examine firstly the hammer test data for the different laboratory sample and then follow by plotting the response function for the railway locations and the laboratory sample we can see observe the influence of the complex response on the location of peaks due to the elastic damper of the Kelvin-voigt model.   
 
-We initiate a random search in the solution space by taking n random samples from the solution space. To do so we first constrain our solution space by defining our **bounds** to exploration locations which may produce sensical values and hence not throw off the algorithm excessively when searching. And then compute the losses at these n random locations. A condensed version of the loss function is as follows,
+| ![Figure 4](_Alt/Figures/Graphs/ih_tests.png) | ![Figure  5](_Alt/Figures/Graphs/ht_targuet_signal.png) |
+|----------------------------------------|----------------------------------------|
+|**Figure 4:** Laboratory hammer tests data. |**Figure 5:** Laboratory and railway Frequency response function |  
+
+We then continue by investigating the below two stiffness distributions of multiple measurement locations and the expected stiffnesses for rail stiffness (Kr) and ballast stiffness (Kb) components of healthy railway locations. From observation we can deduce fitting Gumbel, Log Normal may be most suitable. After fitting different distribution we then evaluate there suitableness through evaluating the value 'ks_statistic' or 'sumsquare_error'; the lower the value of 'ks_statistic' and 'sumsquare_error', the better is the fit of the distributtion. The results where the following,
+
+| ![Figure 6](_Alt/Figures/Graphs/kb_distribution.png) | ![Figure 7](_Alt/Figures/Graphs/kr_distribution.png) |
+|----------------------------------------|----------------------------------------|
+|**Figure 6:** Fitted distributions for ballast components stiffness. |**Figure 7:** Fitted distributions for rail components stiffness |  
+
+**Kr Distribution**: The Kolmogorov smirnov test for the rail stiffness indicates that the Type I Gumbel disitribution indicates the best fit. By contrary through the mean square error metric we would assume the Normal distribution would be the best fit which also the case according to the the ks_statistic which can be chosen as our distribution. Given the characteristics of both distribution since we are interested in capturing the greatest number of sample and perhaps may forego the precission of extreme values in the tails, we will assume the **Kr** to be best represented through a Normal distribution.
+
+**Kb Distribution**: In this case we have an opposite scenatio as opposed to the rail stiffness the ks_statistic values suggest normal distribution as the best fit however, but in this case the mean square error suggests that the lognormal distribution would be the best distribution. Since we can observe the distribution  is slightly skewed to the left in this case we believe a lognormal distribution best fits the samples.
+
+|              | **Rail Stiffness** |                   | **Ballast Stiffness** |                   |
+|--------------|------------------------|-------------------|--------------------|-------------------|
+| Distribution | Mean                   | Std               | Mean               | Std               |
+| **Normal**         | **7.563600e+08**           | **3.220440e+08**      | 7.563600e+08      | 3.220440e+08      |
+| gumbel_l     | 9.188854e+08           | 3.127422e+08      |                    |                   |
+| gumbel_r     | 5.975530e+08           | 2.935236e+08      | 9.188854e+08      | 3.127422e+08      |
+| **Lognormal**      |                        |                   | **5.975530e+08**      | **2.935236e+08**      |
+
+**Table 1**: Mean and standard deviation for ballast stiffness samples (Lognormal distribution) and rail stiffness samples (Normal distribution) 
+
+### Track stiffness monitoring investigation
+
+We know continue performing a small parametric study in order to further understand the sensitivity of different parameters to the response of a railway location under impact or some form of excitation. To do so we begin by investigating three scenarios to assess the frequency responses from the FE model.
+
+Performed scenarios:
+> Scenario 1: Equally spaced stifnesses for both ballast and Stiffener with a Mean & standard deviation of: <br>
+```np.linspace(kp-kp*0.5, kp+kp*0.5, n)``` and ```np.linspace(kb-kb*0.5, kb+kb*0.5, n))```<br>
+> Scenario 2.1: Constant Fastener stiffness with a value of ```500e6``` and equally spaced distributed ballast stiffness of:<br>
+```np.linspace(kb-kb*0.5, kb+kb*0.5, n))```<br>
+> Scenario 2.2: Constant Ballast stiffness with a value of ```100e6``` and equally spaced ballast stiffness of: <br>
+```np.linspace(kp-kp*0.5, kp+kp*0.5, n))```
+
+The results of the study are the following,
+
+![Figure 8](_Alt/Figures/Graphs/frf_sensitivity_analysis.png)
+
+**Figure 8:** Solutions to the Frequency response function parametric study.
+
+A breakdown of the behaviour of the frequency response function is the following. Peaks indicate the presence of the natural frequencies of the structure under test ie Resonance. For a ballasted track, between every pair of resonant frequencies, an anti-resonant frequency can be expected. A typical anti-resonant frequency is observed in discretely supported tracks with two elastic layers.
+
+The lowest possible vertical resonant frequency of the track structure is the full track resonance (ft). It is characterised by all suspended mass of the track structure, moving in vertical direction relative to the infinitely stiff boundary of the structure. Whereas ballasted tracks have full track resonant frequencies of 40 to 140 Hz
+A second vertical resonant frequency (fb) is found when considering track structures with baseplates mounted on block supports or on sleepers. The vibration mode shape is comparable to the full track vibration mode, namely a long bending wave, as shown in Figure 3-2. Typical resonant frequencies of this vibration mode are between 100 and 400 Hz.
+
+Another vertical vibration mode describes the rail, vibrating relative to the supports. This rail resonant frequency (ft) heavily depends on the railpad properties and is between 250 and 1500 Hz. For frequencies below 500 Hz, bending of the rails is the dominating vibration mode shape, whereas ben- ding plus shear determine the mode shape at resonant frequencies higher than approximately 500 Hz. 
+
+The pin-pin resonance (fmm) is a clear mark in the mid-span receptance. This resonance is located in the same range in which the rail resonance can occur. The resonant frequency is a function of the rail properties and the support spacing and is hardly sensitive towards stiffness properties. Pin-pin resonant frequencies have been found between 500 Hz and 1200 Hz. For a longer support spacing, the resonant frequency decreases. The conformity in length of a few neighboring spans is important for the sharpness of the resonant peak.
+
+### Accounting for the uncertainty in component stiffness
+
+As we initially observed there is a substantial range of stiffnesses the twp main ralway sitffness components can have whilst remaining evaluated as healthy locations. After having performed the parametric study we now aim to quantify the effects of this uncertainty and determine the range under which the FRF may still take whilst remaining as a healthy location.  
+
+We therefore investigate firstly for different mesh sizes 1: Small and 2: Big mesh sizes on the diffrent receptance bounds low [10Hz - 100Hz] and high [300Hz - 900Hz] over which we perform to scenarios:
+
+- Analysis 1: Sumation of all values within bound.
+- Analysis 2: Sumation of all values excluding natural frequencies
+
+The  results of the investigation where the following,
+
+![Figure 9](_Alt/Figures/Graphs/mc_simul_results.png)
+
+**Figure 9:** Histrogram plot monte carlo simulation study on receptance bounds.
+
+The results of the monte carlo study where quite comforting since they demonstrate that the response of the FRF is to a large extent similar to the stiffness samples since they follow the same distributions. Therefore we can assume that the specified bound locations are quite robustly the locutions wher if nearby peaks are detected we can assume healthy railway locations to be indentified. Moreover the investigation into the mesh size influence is also comforting since it demonstrates little influence on non exploded results (corresponding to the natural frequencies), in which case we can observe that a more refined mesh requires the frequency response to be much closer for resonance to occurr. Therefore in reconstruction or estimation the finer the mesh the more robust a solution will be since the actual response may be better reproduced.
+
+### Investigation into the capability of the `TRACK v3.0` x Kelvin-Voigt model through Matlab signal processing capabilities against the laboratory results. 
+
+We now average the monte carlo simulation response for a small and coarse mesh and compare it against the laboratory results. We can observe how the residuals are relatively small and decay at the same time as the signal does. This just refers to the importance of adequately predicting the first resonant peak in adequately reconstructing the signal.
+
+![Figure 9](_Alt/Figures/Graphs/mc_residuals.png)
+
+**Figure 9:** Histrogram plot monte carlo simulation study on receptance bounds.
+
+## 2. The detection algorithm 
+
+We not therefore implement all the gained understanding from the laboratory signal behaviour and samples distribution and aim to implement through a gradient based method to converge to the solution. The problem statement can be broken down as follows,
+
+| Problem | Target variable $t$ | Predictor variable $x$ |
+| :-- | :-- | :-- |
+| Determining railway component stiffnesses | Rail stiffness [**Kr**] & Ballast stiffness [**Kb**] | Location and magnitude of peak Receptance & frequency |
+
+And the aim of this method will be to estimate the structural health of the following two samples:
+  
+1. RAIL_target_frf_1.csv 
+2. RAIL_target_frf_2.csv.  
+
+We make use of the peakdetect module to detect the peaks within a specified range or `lookahead` which we then implement thorugh a function to call within our optimiser
 
 ```python
-    def loss_function(self, x_list):
-        
-        A_list, y_list = self.areas_coordinates_write_split(x_list)
-        mass_truss = self.mass_truss(A_list, y_list)
-        frequencies = self.eigenfrequencies(A_list)
-
-        freq_penalty = 0
-        all_positive = True
-        for f, t in zip(frequencies, self.config["freq_constraints"]):
-            diff = f - t
-            penalty_factor = 1 if diff >= 0 else self.config["violation_penalty"]
-            freq_penalty += penalty_factor * (np.abs(diff) / t)
-            if diff < 0:
-                all_positive = False
-        
-        if all_positive:  
-            self.state["mass_norm"] = min(mass_truss, self.state["mass_norm"])
-
-        normalized_mass_penalty = (mass_truss - self.state["mass_norm"]) / self.state["mass_norm"]
-        normalized_freq_penalty = freq_penalty / len(self.config["freq_constraints"])
-        constraint_violation = normalized_freq_penalty + normalized_mass_penalty
-
-        LOSS = (self.config["mass_weight"] * normalized_mass_penalty +
-                self.config["freq_weight"] * normalized_freq_penalty)
-        
-        # -------------------------- Optimisation monitoring ------------------------- #
-        print(f'{tabulate(optmonitor_data, headers="firstrow", tablefmt="grid")}\n')
-        self.state["monitor_df"] = pd.concat([self.state["monitor_df"], new_data], ignore_index=True)
-         
-        return LOSS
-```
-As we can see we compute the **mass** and **first three eigenfrequencies** of the truss. We then calculate a normalised frequency penalty by dividing the difference between the frequencies with its constraints and applying a penalty factor in case that the difference is smaller than zero. Through this method we are able  to penalise solutions that do not meet the constraints but we also don't excessively penalise potentially close solutions to the minima abd throw off the gaussian process. 
-
-Then in the case that the constraints have been met we take the current minimum mass and calculate the difference between the current mass and the lowest obtained mass and normalise it by dividing the difference by minimum mass. This approach allows for the mass penalty to always update as better solutions are obtained. 
-
-The loss is finally computed by multiplying the the normalised **mass** and **frequency** components by user-specified **weight factors**. 
-
-We then **normalise** our data through `MinMaxscaler` for the contributions of the coordinates and and areas to be of equal weight despite unequal magnitudes. We then initiate the other hyperparameters of the `TRUSS` object, this includes the loss function components such as the violation factor and corresponding weights of the mass and frequency components of the loss function which if well formulated should evaluate the proximity to a optimal solution.
-
-### 2. The detection algorithm 
-
-We now initiate the optimiser algorithm, this is done by iteratively try to minimise the loss through gradient based methods `optimize_acqf` which is guided by our acquisition function, in this case the `Expectedimprovement` function which can be expressed as follows,
-
-$$
-\text{EI}(x) = \mathbb{E}\bigl[
-\max(y - f^*, 0) \mid y\sim \mathcal{N}(\mu(x), \sigma^2(x))
-\bigr]
-$$
-
-The EI function is a simple yet effective way to guide the minimiser since we will always optimise the region where we believe the potential gain is highest. To do so we sample from our gaussian process and compare it with out current best solution $f^{*}$ we then perform $\text{argmin}(\text{EI}(x))$ for the n first solutions `raw_samples` which are then ran through the minimiser.
-
-In addition to this, the optimiser is set with some predisposed bounds where we can ensure as an example that our 15 cross section do not yield negative values leading to complex eigenfrequencies. We also set a number of `num_restarts` to help the minimiser to reset in case it gets stuck in local minima. Then the targets are unnormalised to be evaluated by the loss function and then with the results we update the posterior and refit the gaussian process through `set_train_data`. The above process is all contained in the following code excerpt through use of the `BoTorch` module, our own Bayesian optimiser can also be found in [TRUSS_BOPT.py](TRUSS1/truss_bridge/TRUSS_Bopt.py),
-
-```python
-def SingleBOPT(Y_init_single, X_init_single, n_iter, batch_size, Nrestats, objective_function):
-    gp_model = SingleTaskGP(X_init_single, Y_init_single)
-    mll = ExactMarginalLogLikelihood(gp_model.likelihood, gp_model)
-    fit_gpytorch_model(mll)
-    gp_model.set_train_data(inputs=X_init_single, targets=Y_init_single.flatten(), strict=False)
+def inv_solver(DATA_LAB,Frequency_LAB,Kr_guess,Kb_guess,num_elem_slp,step_size, tolerance):
+    '''
+    Inverse solver for stiffness reconstruction.
     
-    for iteration in range(n_iter):
-        print(f'Iteration: {iteration} Best loss = {Y_init_single.min().item():.2f}\n')
-        acq_func = ExpectedImprovement(model=gp_model, best_f=Y_init_single.min(), maximize=False)
-        new_x, _ = optimize_acqf(
-            acq_function=acq_func,
-            bounds=bounds,
-            q=1,
-            num_restarts= Nrestats,
-            raw_samples= batch_size,
-        )
-        new_x_unnorm = unnormalize(new_x, bounds=bounds)
-        new_y = objective_function(new_x_unnorm)
-        new_y = torch.tensor(new_y, dtype=torch.float32).reshape(1,-1)
-        X_init_single = torch.cat([X_init_single, new_x])
-        Y_init_single = torch.cat([Y_init_single, new_y])
+    Parameters:
+        DATA_LAB (array): Location frequency response function.
+        Frequency_LAB (array): Frequency array.
+        Kr_guess (float): Initial guess for rail stiffness.
+        Kb_guess (float): Initial guess for ballast stiffness.
+        num_elem_slp (int): Mesh size.
+        step_size (float): Gradient step size.
+        tolerance (float): Acceptable difference against actual solution [Hz].
         
-        gp_model.set_train_data(inputs=X_init_single, targets=Y_init_single.flatten(), strict=False)
-        fit_gpytorch_model(mll)
-    return X_init_single, Y_init_single
+    Returns:
+        Kr (float): Reconstructed rail stiffness.
+        Kb (float): Reconstructed ballast stiffness.
+        
+    The function aims to reconstruct stiffness parameters Kr and Kb based on the given data.
+    It iteratively adjusts Kr and Kb until the simulated frequencies match the laboratory frequencies within the specified tolerance.
+    The reconstructed parameters are returned, and a plot comparing laboratory and simulated data is generated.
+    '''
+    print(f'Stiffness inverse problem reconstructor')
+    i = 0
+    Kr = Kr_guess 
+    Kb = Kb_guess
+
+    labdata_peaks = peak_solver(DATA_LAB)
+    freq_kb_lab = labdata_peaks[0] 
+    freq_kr_lab = labdata_peaks[1]
+    # ---------------------- INITIALISING LOOP VARIABLES --------------------- #
+    freq_kr_sim = 0
+    freq_kb_sim = 0
+
+    while  not m.isclose(freq_kb_sim , freq_kb_lab, abs_tol = tolerance) and not m.isclose(freq_kr_sim, freq_kr_lab, abs_tol = tolerance):
+        i += 1 #Obtain data with ML Engine
+        DATA_SIM,f=eng.black_box_model(Kr , Kb ,num_elem_slp,nargout=2)
+        # --------------------------- FINDING PEAKS -------------------------- #
+        simuldata_peaks = peak_solver(np.reshape(np.abs(DATA_SIM).real , len(DATA_SIM)))
+        freq_kb_sim = simuldata_peaks[0]
+        freq_kr_sim = simuldata_peaks[1]
+        # --------------------------- SEARCHER LOOP -------------------------- #
+        if (freq_kb_sim / freq_kb_lab) < 1:
+            Kb += step_size*2e6  #Kb exhibits greater sensibility 
+        if (freq_kb_sim / freq_kb_lab) > 1:
+            Kb -= step_size*1e6
+        print(f'Kb new {Kb}')
+        
+        if (freq_kr_sim / freq_kr_lab) < 1:
+            Kr += step_size*1e6 #Kr exhibits less sensibility
+        if (freq_kr_sim / freq_kr_lab) > 1:
+            Kr -= step_size*0.5e6 #Smaller reversed step for faster convergence
+        print(f'Kr new {Kr}')
+    
+    # ------------------------ MINOTRING FUNCTIONALITIES --------------------- #
+    DATA_SIM = np.array(np.abs(DATA_SIM))
+    DATA_SIM = np.reshape(DATA_SIM.real , len(DATA_SIM))
+    interp_arr = np.interp(np.linspace(0, Frequency_LAB[-1], len(Frequency_LAB)), np.ravel(np.array(f)), DATA_SIM , len(DATA_SIM))
+
+    fbt = plt.fill_between(Frequency_LAB,DATA_LAB,interp_arr, 
+                                alpha=0.2, edgecolor='#00B8C8', facecolor='#00B8C8',
+                                linewidth=0, label = 'Residuals between simulation and Laboratory')
+
+    plt.plot(DATA_LAB, label = "Laboratory Data", color="#00A6D6",linestyle = "dotted")
+    #peak_data_plotter(DATA_LAB,labdata_peaks,"Lab Data")
+    peak_data_plotter(np.abs(DATA_SIM),simuldata_peaks,"Simulation Data",Kr,Kb)
+    print(f'Total runs {i},with solutions \n Lab DATA | Kr: {(Kr):.2E} Kb: {(Kb):.2E}\n With frequencies | {freq_kb_sim}[HZ] {freq_kr_sim}[HZ], ')
+
+    return Kr, Kb
 ```
-And thats it! Thats how easy a procedure is necessary to perform efficient informed optimisation with non implementable constraints. The above process is also described in the following figure,
+### Implementing the algorithm 
 
-![Description of the GIF](reading/Figures/solution_approach/TrussBOPT_EOP.gif)
+FINISH...
 
-**Figure 5:** A description of the solution method through the optimiser and its different components. 
+## 3. Results - What is the structural health assesment of the examinable locations  
 
-## Results
+We remember that the aim of this project was to construct a method capable of determining structural health of railway segments through tring to inversely determine the stiffness of its components. We then made use of a series of measurements of healthy railway locations to determine that the stiffnesses of both components can be characterised by the following distributions and the following parameters.
 
-The following discussion will evaluate the success of the project through benchmarking the TRUSS approach against [Kanarachos et al., 2017](https://dx.doi.org/10.1016/j.compstruc.2016.11.005) standard optimisation algorithm, this will be followed by an investigation into the TRUSS solution behaviour.
+|              | **Rail Stiffness**     |                   | **Ballast Stiffness** |                   |
+|--------------|------------------------|-------------------|--------------------|-------------------|
+| Distribution | Mean                   | Std               | Mean               | Std               |
+| Normal         | 7.563600e+08           | 3.220440e+08      | N/A                | N/A               |
+| Lognormal      | N/A                    | N/A               | 5.975530e+08       | 2.935236e+08      |
 
-### 1. Benchmarking against Kanarachos et al., 2017
+**Table 2**: Determined Component values for distributions
 
-As can be seen Kanarachos et al., 2017 and TRUSS produce very similar results, Kanarachos outperforms TRUSS achieving a lower mass whilst TRUSS optimises more for the Natural frequencies. One can also observe how TRUSS is computationally more efficient than Kanarachos converging much faster to a solution even as will be seen later plateauing as it converges to the global minima. Kanarachos did not provide a number of iterations with which its algorithm converge but it is expected TRUSS solution to be significantly lower although per iteration it is likely TRUSS has a longer iteration time. The main benchmarks measure against the publication are the following, 
+We then through means of the FE Module TRACK_v3.0 the signal processing matlab module and the optimisation algorithm built with these two. We were able to reconstruct the frequency response functions for both track locations and determine that there stiffnesses where,
 
-|                   | Cross Section Average [m^2] | Natural Frequency Average [rad/s] | Mass [kg] | Convergence time [s] |
-|-------------------|-----------------------------|-----------------------------------|-----------|----------------------|
-| Kanarachos model | 0.000424                    | 41.572427                         | 360.077107| 473                  |
-| TRUSS model       | 0.000433                    | 40.809468                         | 364.825316| 315                  |
+|              | **Rail Stiffness**   | **Ballast Stiffness**|
+|--------------|----------------------|--------------------|
+| **Sample 1** | 5.500e+08            | 8.00e+07           |
+| **Sample 2** | 4.7500e+08           | 6.00e+07           |
 
-The first three modal shapes of both trusses are the following,
+**Table 3**: Determined Component values for distributions
 
-|                   | Modal shape 1  | Modal shape 2 | Modal shape 3 |
-|-------------------|----------------|----------------|----------------|
-| Kanarachos model | ![Kanarachos Modal shape 1](reading/Figures/truss_solutions/Kanarachos_Opt.png) | ![Kanarachos Modal shape 2](reading/Figures/truss_solutions/Kanarachos_NF1.png) | ![Kanarachos Modal shape 3](reading/Figures/truss_solutions/Kanarachos_NF2.png) |
-| TRUSS model       | ![TRUSS Modal shape 1](reading/Figures/truss_solutions/TRUSS_Opt.png) | ![TRUSS Modal shape 2](reading/Figures/truss_solutions/TRUSS_NF1.png) | ![TRUSS Modal shape 3](reading/Figures/truss_solutions/TRUSS_NF2.png) |
+We then calculate the likelihood of these locations undergoing structural failure through by determining the confidence intervile the lie within where we require a 95th percentile confidence interval ($z \approx 1.96$) to assess a location as faulty. We now evaluate the **Rail stiffness** assuming a normal distribution with parameters in **TABLE 1** samples we obtain the samples are situated at,
 
-We can observe how both solutions for the first 3 modal shapes are similar, yet in comparison to each other they exhibit anti-symmetric dynamic behaviour
+$$
+\begin{aligned}
+PR_1 & \approx \left(1 - \frac{1}{2} \left(1 + \text{erf}\left(\frac{5.5 \times 10^8 - 7.56 \times 10^8}{3.22 \times 10^8 \times \sqrt{2}}\right)\right)\right) \times 100 >\\
+\text{erf}(-0.452) & \approx -0.177 \\
+\text{Sample 1 percentile} & \approx 58.9\%
+\end{aligned}
+$$
+$$
+\begin{aligned}
+PR_2 & \approx \left(1 - \frac{1}{2} \left(1 + \text{erf}\left(\frac{4.75 \times 10^8 - 7.56 \times 10^8}{3.22 \times 10^8 \times \sqrt{2}}\right)\right)\right) \times 100 >\\
+\text{erf}(-0.615) & \approx -0.266 \\
+\text{Sample 2 percentile} & \approx 63.3\%
+\end{aligned}
+$$
+Evaluating the **Ballast stiffness** samples through a lognormal disitribution with parameters from **TABLE 1** with as well not presented but evaluated kurtosis parameter of 0.2443 we obtain,
 
-### 2. The TRUSS algorithm and its convergence
+$$
+\begin{aligned}
+PR_1 \approx \left(1 - \text{erf}\left(\frac{\ln(8 \times 10^7) - 5.97 \times 10^8}{\sqrt{2} \times 2.935 \times 10^8}\right)\right) \times 100 \\
+\text{Sample 1 percentile} & \approx 0\%
+\end{aligned}
+$$
+$$
+\begin{aligned}
+PR_2 \approx \left(1 - \text{erf}\left(\frac{\ln(6 \times 10^7) - 5.97 \times 10^8}{\sqrt{2} \times 2.935 \times 10^8}\right)\right) \times 100 \\
+\text{Sample 2 percentile} & \approx 0\%
+\end{aligned}
+$$
 
-The algorithm seems to find a global minimum is quite fast fashion, after finding this minimum it then tends to plateau and begin a random walk where it ocassionally believes to find a better solution although this is not the case. The below figure showing an optimisation run illustrates how the loss function although suitable can still be improved, since the lowest loss does not correspond to the lowest mass solution that meets the constraints. Moreover, the solution in multiple runs has always been found at the bottom of the first descending branch therefore it might be in best interest to implement a form or early stopping to achieve even faster convergence times. In any case the best solution is still strong and robust.
+Therefore we can observe how both railway locations are at a similar state of decay. We can determine that the rail components are in good condition for both samples, or better said the undergone deterioration is insuffcient to be determined as faulty. By contrast we can also evaluate that the ballast stiffnesses demonstrate extreme deterioration and completely lie outside the confidence interval and the distribution of measurements of healthy ballast locations. Since the stiffness is much lower (as in most structural deterioration issues) **we can determine that there is a loss of support at these locations and that maintenance should be carried out at these locations**.  
 
-![TRUSS convergence path](reading/Figures/solution_approach/Truss_convegence.gif)
-
-**Figure 6:** Optimisation run with the different solutions per time step. 
-
-A convergence study of the algorithm with loose hyperparameter tuning was performed with 5 runs, where the mean and  95th percentile confidence criterion where computed.As we can observe the variance between runs is small for exception of run 1 which gave a very erratic behaviour which had a strong influence o the standard deviation. Despite this we can observe most importantly that despite different initiation parameters the convergence shape is similar for most runs which makes reference to a robust convergence, although this claim should be investigated further and does not account for the previous hyperparameter tuning.
-
-The solution to the yielded the following graph,
-
-![TRUSS convergence behaviour](reading/Figures/convergence_study.png)
-
-**Figure 7:** TRUSS convergence study. 
-
- 
 ## Repo structure and contents
-- 口Reading includes the original paper and reference, investigation and reference results obtained with other optimization approaches, check this paper: [Kanarachos et al., 2017](https://dx.doi.org/10.1016/j.compstruc.2016.11.005)
-- **pyJive**: a finite element code that can compute the natural frequencies of a given truss design, which can be treated as black box model for this project
-- **truss_bridge**: a directory with input files for the case of the project, including a [notebook](truss_bridge/truss_bridge.ipynb) with a demonstration of how to interact with the finite element code
-- **Truss notebook**: The Jupyter notebook containing the implementation of the Bayesian optimiser and the posterior analysis. It covers a from blank implementation, a solution through Botorch module and a posterior analysis on the behaviour of the algorithm against [Kanarachos et al., 2017](https://dx.doi.org/10.1016/j.compstruc.2016.11.005) and its convergence behaviour. 
-- **End of project presentation**: A breakdown of the project and some of its detail can be found in [TrussBOPT.pptx](TRUSS1/TRUSS1/TrussBOPT_EOP.pptx).
+- _Alt Includes old files and figures used to make the repo and notebook.
+- **TRACK_v3.0**: A finite element code that computes the frequencies response function of the railway by making use of the Kelvin-Voigt model, this module is in programmed in Matlab and requires de signal processing Matlab addon module.
+- **data**: Where all laboratory and simulation results where stored and available for reproduction of the results
+- **RAIL01**: A Jupyter notebook containing the analysis and the implementation of the algorithm itself.
 
 ### Useful links
-The original publication:
-- Approach undertaken by Kanarachos through a pure optimisation approach, check this paper for the publication: [https://dx.doi.org/10.1016/j.compstruc.2016.11.005](https://dx.doi.org/10.1016/j.compstruc.2016.11.005)
+Original insipirational reference:
+- Fast and robust identification of railway track stiffness from simple field measurement: [https://doi.org/10.1016/j.ymssp.2020.107431](https://doi.org/10.1016/j.ymssp.2020.107431)
