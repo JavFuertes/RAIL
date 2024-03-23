@@ -42,13 +42,13 @@ This study makes use of a 3D finite element model, as shown in <b>Figure 3</b>. 
 
 We firstly begin by understanding and plotting the lab data two hammer tests where conducted on the same sample and the FRF was also measured. Therefore we first examine firstly the hammer test data for the different laboratory sample and then follow by plotting the response function for the railway locations and the laboratory sample we can see observe the influence of the complex response on the location of peaks due to the elastic damper of the Kelvin-voigt model.   
 
-| ![Figure 4](_Alt/Figures/Graphs/ih_tests.png) | ![Figure  5](_Alt/Figures/Graphs/ht_targuet_signal.png) |
+| ![Figure 4](_Alt/Figures/Graphs/IH_tests.png) | ![Figure  5](_Alt/Figures/Graphs/ht_target_signal.png) |
 |----------------------------------------|----------------------------------------|
 |**Figure 4:** Laboratory hammer tests data. |**Figure 5:** Laboratory and railway Frequency response function |  
 
 We then continue by investigating the below two stiffness distributions of multiple measurement locations and the expected stiffnesses for rail stiffness (Kr) and ballast stiffness (Kb) components of healthy railway locations. From observation we can deduce fitting Gumbel, Log Normal may be most suitable. After fitting different distribution we then evaluate there suitableness through evaluating the value 'ks_statistic' or 'sumsquare_error'; the lower the value of 'ks_statistic' and 'sumsquare_error', the better is the fit of the distributtion. The results where the following,
 
-| ![Figure 6](_Alt/Figures/Graphs/kb_distribution.png) | ![Figure 7](_Alt/Figures/Graphs/kr_distribution.png) |
+| ![Figure 6](_Alt/Figures/Graphs/KB_distribution.png) | ![Figure 7](_Alt/Figures/Graphs/KR_distribution.png) |
 |----------------------------------------|----------------------------------------|
 |**Figure 6:** Fitted distributions for ballast components stiffness. |**Figure 7:** Fitted distributions for rail components stiffness |  
 
@@ -80,7 +80,7 @@ Performed scenarios:
 
 The results of the study are the following,
 
-![Figure 8](_Alt/Figures/Graphs/frf_sensitivity_analysis.png)
+![Figure 8](_Alt/Figures/Graphs/FRF_sensitivity_analysis.png)
 
 **Figure 8:** Solutions to the Frequency response function parametric study.
 
@@ -104,7 +104,7 @@ We therefore investigate firstly for different mesh sizes 1: Small and 2: Big me
 
 The  results of the investigation where the following,
 
-![Figure 9](_Alt/Figures/Graphs/mc_simul_results.png)
+![Figure 9](_Alt/Figures/Graphs/MC_simul_results.png)
 
 **Figure 9:** Histrogram plot monte carlo simulation study on receptance bounds.
 
@@ -114,7 +114,7 @@ The results of the monte carlo study where quite comforting since they demonstra
 
 We now average the monte carlo simulation response for a small and coarse mesh and compare it against the laboratory results. We can observe how the residuals are relatively small and decay at the same time as the signal does. This just refers to the importance of adequately predicting the first resonant peak in adequately reconstructing the signal.
 
-![Figure 9](_Alt/Figures/Graphs/mc_residuals.png)
+![Figure 9](_Alt/Figures/Graphs/MC_residuals.png)
 
 **Figure 9:** Histrogram plot monte carlo simulation study on receptance bounds.
 
@@ -207,7 +207,7 @@ def inv_solver(DATA_LAB,Frequency_LAB,Kr_guess,Kb_guess,num_elem_slp,step_size, 
 
 FINISH...
 
-## 3. Results - What is the structural health assesment of the examinable locations  
+## 3. Results - What is the structural health assesment of the examined railway locations  
 
 We remember that the aim of this project was to construct a method capable of determining structural health of railway segments through tring to inversely determine the stiffness of its components. We then made use of a series of measurements of healthy railway locations to determine that the stiffnesses of both components can be characterised by the following distributions and the following parameters.
 
