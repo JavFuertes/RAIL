@@ -1,6 +1,5 @@
 # Algorithmic structural health monitoring of railway infrastructure
 
-### Background
 Railway has become an increasingly popular transportation mode all over the world. In the Netherlands, the railway network reaches up to 3223 km in total and transports millions of passengers and million tonnes of freight every year. In recent decades, the Dutch railway keeps evolving to be safer, faster, and greener to become more competitive with air and road transport. The condition of railway tracks affects the safety, ride comfort, and sustainability of train operations. To achieve this goal, the health condition of railway tracks needs to be timely and properly maintained.
 
 |<img src="https://cdnstorevoestalpine.blob.core.windows.net/images/815857/Open_CMS_Lightbox/roadmaster-visualisation.jpg" width="800">|
@@ -8,7 +7,7 @@ Railway has become an increasingly popular transportation mode all over the worl
 | **Figure 1:** Hypothetical scheme of smart railway infrastructure |
 
 
-**Figure 2** shows a typical modern railway track structure. The rails are fixed on the sleepers by fasteners (consisting of rail pads and clamps). Rail pads are made of resilient material. The ballast layer also provides elasticity for the track structure. The stiffness of these two components determines the overall track stiffness. In practice, track stiffness can be measured by a non-destructive hammer test, as shown in **Figure 2**. The rail head is excited with a hammer, and the dynamic response (usually acceleration) is measured at the location of interest. Then, the input force and output accelerations are used to calculate a frequency response function (FRF), from which the track stiffness can be identified. 
+**Figure 1** shows a typical modern railway track structure. The rails are fixed on the sleepers by fasteners (consisting of rail pads and clamps). Rail pads are made of resilient material. The ballast layer also provides elasticity for the track structure. The stiffness of these two components determines the overall track stiffness. In practice, track stiffness can be measured by a non-destructive hammer test, as shown in **Figure 2**. The rail head is excited with a hammer, and the dynamic response (usually acceleration) is measured at the location of interest. Then, the input force and output accelerations are used to calculate a frequency response function (FRF), from which the track stiffness can be identified. 
 
 The main components **which** contribute to the track stiffness are,
 
@@ -286,5 +285,5 @@ Therefore we can observe how both railway locations are at a similar state of de
 - **RAIL01**: A Jupyter notebook containing the analysis and the implementation of the algorithm itself.
 
 ### Useful links
-Original insipirational reference:
+Original paper which served as inspiration for this investigation:
 - Fast and robust identification of railway track stiffness from simple field measurement: [https://doi.org/10.1016/j.ymssp.2020.107431](https://doi.org/10.1016/j.ymssp.2020.107431)
