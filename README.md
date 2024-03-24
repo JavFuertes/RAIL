@@ -49,15 +49,15 @@ We firstly begin by understanding and plotting the lab data two hammer tests whe
 |----------------------------------------|----------------------------------------|
 |**Figure 6:** Laboratory hammer tests data. |**Figure 5:** Laboratory and railway Frequency response function |  
 
-We then continue by investigating the below two stiffness distributions of multiple measurement locations and the expected stiffnesses for rail stiffness (Kr) and ballast stiffness (Kb) components of healthy railway locations. From observation we can deduce fitting Gumbel, Log Normal may be most suitable. After fitting different distribution we then evaluate there suitableness through evaluating the value 'ks_statistic' or 'sumsquare_error'; the lower the value of 'ks_statistic' and 'sumsquare_error', the better is the fit of the distributtion. The results where the following,
+We then continue by investigating the below two stiffness distributions of multiple measurement locations and the expected stiffnesses for rail stiffness (Kr) and ballast stiffness (Kb) components of healthy railway locations. From observation we can deduce fitting Gumbel, Log Normal may be most suitable. After fitting different distribution we then evaluate there suitableness through evaluating the value 'ks_statistic' or 'sumsquare_error'; the lower the value of 'ks_statistic' and 'sumsquare_error', the better is the fit of the distribution. The results where the following,
 
 | ![Figure 6](_Alt/Figures/Graphs/KB_distribution.png) | ![Figure 7](_Alt/Figures/Graphs/KR_distribution.png) |
 |----------------------------------------|----------------------------------------|
 |**Figure 7:** Fitted distributions for ballast components stiffness. |**Figure 7:** Fitted distributions for rail components stiffness |  
 
-**Kr Distribution**: The Kolmogorov smirnov test for the rail stiffness indicates that the Type I Gumbel disitribution indicates the best fit. By contrary through the mean square error metric we would assume the Normal distribution would be the best fit which also the case according to the the ks_statistic which can be chosen as our distribution. Given the characteristics of both distribution since we are interested in capturing the greatest number of sample and perhaps may forego the precission of extreme values in the tails, we will assume the **Kr** to be best represented through a Normal distribution.
+**Kr Distribution**: The Kolmogorov Smirnov test for the rail stiffness indicates that the Type I Gumbel distribution indicates the best fit. By contrary through the mean square error metric we would assume the Normal distribution would be the best fit which also the case according to the the ks_statistic which can be chosen as our distribution. Given the characteristics of both distribution since we are interested in capturing the greatest number of sample and perhaps may forego the precision of extreme values in the tails, we will assume the **Kr** to be best represented through a Normal distribution.
 
-**Kb Distribution**: In this case we have an opposite scenatio as opposed to the rail stiffness the ks_statistic values suggest normal distribution as the best fit however, but in this case the mean square error suggests that the lognormal distribution would be the best distribution. Since we can observe the distribution  is slightly skewed to the left in this case we believe a lognormal distribution best fits the samples.
+**Kb Distribution**: In this case we have an opposite scenario as opposed to the rail stiffness the ks_statistic values suggest normal distribution as the best fit however, but in this case the mean square error suggests that the lognormal distribution would be the best distribution. Since we can observe the distribution  is slightly skewed to the left in this case we believe a lognormal distribution best fits the samples.
 
 |              | **Rail Stiffness** |                   | **Ballast Stiffness** |                   |
 |--------------|------------------------|-------------------|--------------------|-------------------|
@@ -98,9 +98,9 @@ The pin-pin resonance (fmm) is a clear mark in the mid-span receptance. This res
 
 ### Accounting for the uncertainty in component stiffness
 
-As we initially observed there is a substantial range of stiffnesses the twp main ralway sitffness components can have whilst remaining evaluated as healthy locations. After having performed the parametric study we now aim to quantify the effects of this uncertainty and determine the range under which the FRF may still take whilst remaining as a healthy location.  
+As we initially observed there is a substantial range of stiffnesses the twp main railway stiffness components can have whilst remaining evaluated as healthy locations. After having performed the parametric study we now aim to quantify the effects of this uncertainty and determine the range under which the FRF may still take whilst remaining as a healthy location.  
 
-We therefore investigate firstly for different mesh sizes 1: Small and 2: Big mesh sizes on the diffrent receptance bounds low [10Hz - 100Hz] and high [300Hz - 900Hz] over which we perform to scenarios:
+We therefore investigate firstly for different mesh sizes 1: Small and 2: Big mesh sizes on the different receptance bounds low [10Hz - 100Hz] and high [300Hz - 900Hz] over which we perform to scenarios:
 
 - Analysis 1: Sumation of all values within bound.
 - Analysis 2: Sumation of all values excluding natural frequencies
@@ -111,7 +111,7 @@ The  results of the investigation where the following,
 |---------------------------------------------------------------|
 | **Figure 9:** Histrogram plot monte carlo simulation study on receptance bounds. | 
 
-The results of the monte carlo study where quite comforting since they demonstrate that the response of the FRF is to a large extent similar to the stiffness samples since they follow the same distributions. Therefore we can assume that the specified bound locations are quite robustly the locutions wher if nearby peaks are detected we can assume healthy railway locations to be indentified. Moreover the investigation into the mesh size influence is also comforting since it demonstrates little influence on non exploded results (corresponding to the natural frequencies), in which case we can observe that a more refined mesh requires the frequency response to be much closer for resonance to occurr. Therefore in reconstruction or estimation the finer the mesh the more robust a solution will be since the actual response may be better reproduced.
+The results of the monte carlo study where quite comforting since they demonstrate that the response of the FRF is to a large extent similar to the stiffness samples since they follow the same distributions. Therefore we can assume that the specified bound locations are quite robustly the locutions where if nearby peaks are detected we can assume healthy railway locations to be indentified. Moreover the investigation into the mesh size influence is also comforting since it demonstrates little influence on non exploded results (corresponding to the natural frequencies), in which case we can observe that a more refined mesh requires the frequency response to be much closer for resonance to occur. Therefore in reconstruction or estimation the finer the mesh the more robust a solution will be since the actual response may be better reproduced.
 
 ### Investigation into the capability of the `TRACK v3.0` x Kelvin-Voigt model through Matlab signal processing capabilities against the laboratory results. 
 
@@ -130,7 +130,7 @@ We not therefore implement all the gained understanding from the laboratory sign
 | :-- | :-- | :-- | :-- |
 | Determining railway component stiffnesses | Rail stiffness [**Kr**] & Ballast stiffness [**Kb**] | Location and magnitude of peak Receptance & frequency | 1. RAIL_target_frf_1.csv<br> 2. RAIL_target_frf_2.csv |
 
-We make use of the peakdetect module to detect the peaks within the specified `lookahead`, we initially carry this out for the FRF to be reconstructed and we determine the ballast and rail frequencies we aim to converge to. We then initiate a loop whose escape clause is determined by the difference between both frequencies being less than the prescribed `tolerance` . We then therefore then iterate and manually calibrate some weights to improve the speed of the convergence. In this case we decide to conservatively initiate low stiffnesses for both components and set greater step sizes whenever the stiffness is being underdetermined and a smaller time step when we see a change in the ratio of Predicted/Labortory we aditionally also from a few runs calibrate the solver to have a smaller step size when determining the rail stiffness since the frequencies are more senstive to stiffness changes than in comparison to ballast stiffnesses. As can be seen from **TABLE 3** this method works well and the convergence of the method is relatively fast with the eventual FRF being quite similar. 
+We make use of the peakdetect module to detect the peaks within the specified `lookahead`, we initially carry this out for the FRF to be reconstructed and we determine the ballast and rail frequencies we aim to converge to. We then initiate a loop whose escape clause is determined by the difference between both frequencies being less than the prescribed `tolerance` . We then therefore then iterate and manually calibrate some weights to improve the speed of the convergence. In this case we decide to conservatively initiate low stiffnesses for both components and set greater step sizes whenever the stiffness is being under-determined and a smaller time step when we see a change in the ratio of Predicted/Laboratory we additionally also from a few runs calibrate the solver to have a smaller step size when determining the rail stiffness since the frequencies are more sensitive to stiffness changes than in comparison to ballast stiffnesses. As can be seen from **TABLE 3** this method works well and the convergence of the method is relatively fast with the eventual FRF being quite similar. 
 
 ```python
 def inv_solver(DATA_LAB,Frequency_LAB,Kr_guess,Kb_guess,num_elem_slp,step_size, tolerance):
@@ -202,7 +202,7 @@ def inv_solver(DATA_LAB,Frequency_LAB,Kr_guess,Kb_guess,num_elem_slp,step_size, 
 
     return Kr, Kb
 ```
-Nevertheless, the author acknowledges some lackings in this approach which could be evaluated if in different scenarios these prove neccessary. Firstly the gradient based method can be significantly improved by having automaticly adjusted step sizes through a ratio against the prediction stiffness, since with the current method it is a possibility that a combination of prescribed `tolerance` and `step_size` be such that the algorithm doesnt converge. Moreover, the `TRACK_v3.0` makes also use of the number of sleepers when calling the `black_box_model` therefore this method is currently omiting   necessary in reconstructing the actual state of the railway. It is possible that such incorporations could make this approach faster and more robust although for now they have not been deemed neccessary.  
+Nevertheless, the author acknowledges some lackings in this approach which could be evaluated if in different scenarios these prove necessary. Firstly the gradient based method can be significantly improved by having automaticaly adjusted step sizes through a ratio against the prediction stiffness, since with the current method it is a possibility that a combination of prescribed `tolerance` and `step_size` be such that the algorithm doesn't converge. Moreover, the `TRACK_v3.0` makes also use of the number of sleepers when calling the `black_box_model` therefore this method is currently omiting   necessary in reconstructing the actual state of the railway. It is possible that such incorporations could make this approach faster and more robust although for now they have not been deemed necessary.  
 
 | Sample         | Reconstruction run     |
 |----------------|------------------------|
@@ -211,7 +211,7 @@ Nevertheless, the author acknowledges some lackings in this approach which could
 
 **Table 3**: Implementation of the reconstruction algorithm to predict railway component sitffness
 
-The algorithm was run timed through the `%%timeit` magic command from Jupter lab. The timing of both of the solver in both runs was the following,
+The algorithm was run timed through the `%%timeit` magic command from Jupyter lab. The timing of both of the solver in both runs was the following,
 
 | Sample       | Time [s]  | Standard Deviation [s]  |
 |--------------|-----------|-------------------------|
@@ -220,11 +220,11 @@ The algorithm was run timed through the `%%timeit` magic command from Jupter lab
 
 **Table 4**: Effectiveness of the reconstruction algorithm for both samples.
 
-It is important to note that the effectiveness of the solution is to a great extent determined by the stifness guesses `kb_guess` and `kr_guess` and also by the determined `tolerance` and `step_size` but in the case of Sample 1 and Sample 2 not much tweaking was done to the hyperparameters and the solution was still stable and relatively fast.
+It is important to note that the effectiveness of the solution is to a great extent determined by the stiffness guesses `kb_guess` and `kr_guess` and also by the determined `tolerance` and `step_size` but in the case of Sample 1 and Sample 2 not much tweaking was done to the hyperparameters and the solution was still stable and relatively fast.
 
 ## 3. Results - What is the structural health assesment of the examined railway locations  
 
-We remember that the aim of this project was to construct a method capable of determining structural health of railway segments through tring to inversely determine the stiffness of its components. We then made use of a series of measurements of healthy railway locations to determine that the stiffnesses of both components can be characterised by the following distributions and the following parameters.
+We remember that the aim of this project was to construct a method capable of determining structural health of railway segments through trying to inversely determine the stiffness of its components. We then made use of a series of measurements of healthy railway locations to determine that the stiffnesses of both components can be characterised by the following distributions and the following parameters.
 
 |              | **Rail Stiffness**     |                   | **Ballast Stiffness** |                   |
 |--------------|------------------------|-------------------|--------------------|-------------------|
@@ -243,7 +243,7 @@ We then through means of the FE Module TRACK_v3.0 the signal processing matlab m
 
 **Table 6**: Predicted sample stiffnesses for Sample 1 and Sample 2
 
-We then calculate the likelihood of these locations undergoing structural failure through by determining the confidence intervile the lie within where we require a 95th percentile confidence interval ($z \approx 1.96$) to assess a location as faulty. We now evaluate the **Rail stiffness** assuming a normal distribution with parameters in **TABLE 1** samples we obtain the samples are situated at,
+We then calculate the likelihood of these locations undergoing structural failure through by determining the confidence interval the lie within where we require a 95th percentile confidence interval ($z \approx 1.96$) to assess a location as faulty. We now evaluate the **Rail stiffness** assuming a normal distribution with parameters in **TABLE 1** samples we obtain the samples are situated at,
 
 $$
 \begin{aligned}
@@ -261,7 +261,7 @@ PR_2 & \approx \left(1 - \frac{1}{2} \left(1 + \text{erf}\left(\frac{4.75 \times
 \end{aligned}
 $$
 
-Evaluating the **Ballast stiffness** samples through a lognormal disitribution with parameters from **TABLE 1** with as well not presented but evaluated kurtosis parameter of 0.2443 we obtain,
+Evaluating the **Ballast stiffness** samples through a lognormal distribution with parameters from **TABLE 1** with as well not presented but evaluated kurtosis parameter of 0.2443 we obtain,
 
 $$
 \begin{aligned}
