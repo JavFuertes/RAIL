@@ -7,7 +7,7 @@ Railway has become an increasingly popular transportation mode all over the worl
 
 **Figure 2** shows a typical modern railway track structure. The rails are fixed on the sleepers by fasteners (consisting of rail pads and clamps). Rail pads are made of resilient material. The ballast layer also provides elasticity for the track structure. The stiffness of these two components determines the overall track stiffness. In practice, track stiffness can be measured by a non-destructive hammer test, as shown in **Figure 2**. The rail head is excited with a hammer, and the dynamic response (usually acceleration) is measured at the location of interest. Then, the input force and output accelerations are used to calculate a frequency response function (FRF), from which the track stiffness can be identified. 
 
-The main components which contribute to the track stiffness are,
+The main components **which** contribute to the track stiffness are,
 
 1. *Rail* are the members of the track laid in two parallel lines to provide an unchanging, continuous, and level surface for the movement of trains. They are made of high-carbon steel. Rails provide a pathway which is smooth and has very little friction and act as a lateral guide for the wheels. They bear the stresses developed due to vertical loads transmitted to them by the axles and wheels of rolling stock as well as due to braking and thermal forces. They transmit the load to a large area of the formation through sleepers and the ballast.
 
@@ -122,16 +122,11 @@ We now average the monte carlo simulation response for a small and coarse mesh a
 
 We not therefore implement all the gained understanding from the laboratory signal behaviour and samples distribution and aim to implement through a gradient based method to converge to the solution. The problem statement can be broken down as follows,
 
-| Problem | Target variable $t$ | Predictor variable $x$ |
-| :-- | :-- | :-- |
-| Determining railway component stiffnesses | Rail stiffness [**Kr**] & Ballast stiffness [**Kb**] | Location and magnitude of peak Receptance & frequency |
+| Problem | Target variable $t$ | Predictor variable $x$ | Predicted Datasets |
+| :-- | :-- | :-- | :-- |
+| Determining railway component stiffnesses | Rail stiffness [**Kr**] & Ballast stiffness [**Kb**] | Location and magnitude of peak Receptance & frequency | 1. RAIL_target_frf_1.csv<br> 2. RAIL_target_frf_2.csv |
 
-And the aim of this method will be to estimate the structural health of the following two samples:
-  
-1. RAIL_target_frf_1.csv 
-2. RAIL_target_frf_2.csv.  
-
-We make use of the peakdetect module to detect the peaks within a specified range or `lookahead` which we then implement thorugh a function to call within our optimiser
+We make use of the peakdetect module to detect the peaks within the specified `lookahead`, we initially carry this out for the FRF to be reconstructed and we determine the ballast and rail frequencies we aim to converge to. We then initiate a loop whose escape clause is determined by the difference between both frequencies being less than the prescribed `tolerance` . We then therefore then iterate and manually calibrate some weights to improve the speed of the convergence. In this case we decide to conservatively initiate low stiffnesses for both components and set greater step sizes whenever the stiffness is being underdetermined and a smaller time step when we see a change in the ratio of Predicted/Labortory we aditionally also from a few runs calibrate the solver to have a smaller step size when determining the rail stiffness since the frequencies are more senstive to stiffness changes than in comparison to ballast stiffnesses. As can be seen from **TABLE 3** this method works well and the convergence of the method is relatively fast with the eventual FRF being quite similar. 
 
 ```python
 def inv_solver(DATA_LAB,Frequency_LAB,Kr_guess,Kb_guess,num_elem_slp,step_size, tolerance):
@@ -167,7 +162,7 @@ def inv_solver(DATA_LAB,Frequency_LAB,Kr_guess,Kb_guess,num_elem_slp,step_size, 
     freq_kr_sim = 0
     freq_kb_sim = 0
 
-    while  not m.isclose(freq_kb_sim , freq_kb_lab, abs_tol = tolerance) and not m.isclose(freq_kr_sim, freq_kr_lab, abs_tol = tolerance):
+    while not m.isclose(freq_kb_sim , freq_kb_lab, abs_tol = tolerance) and not m.isclose(freq_kr_sim, freq_kr_lab, abs_tol = tolerance):
         i += 1 #Obtain data with ML Engine
         DATA_SIM,f=eng.black_box_model(Kr , Kb ,num_elem_slp,nargout=2)
         # --------------------------- FINDING PEAKS -------------------------- #
@@ -197,15 +192,31 @@ def inv_solver(DATA_LAB,Frequency_LAB,Kr_guess,Kb_guess,num_elem_slp,step_size, 
                                 linewidth=0, label = 'Residuals between simulation and Laboratory')
 
     plt.plot(DATA_LAB, label = "Laboratory Data", color="#00A6D6",linestyle = "dotted")
-    #peak_data_plotter(DATA_LAB,labdata_peaks,"Lab Data")
+    peak_data_plotter(DATA_LAB,labdata_peaks,"Lab Data")
     peak_data_plotter(np.abs(DATA_SIM),simuldata_peaks,"Simulation Data",Kr,Kb)
     print(f'Total runs {i},with solutions \n Lab DATA | Kr: {(Kr):.2E} Kb: {(Kb):.2E}\n With frequencies | {freq_kb_sim}[HZ] {freq_kr_sim}[HZ], ')
 
     return Kr, Kb
 ```
-### Implementing the algorithm 
+Nevertheless, the author acknowledges some lackings in this approach which could be evaluated if in different scenarios these prove neccessary. Firstly the gradient based method can be significantly improved by having automaticly adjusted step sizes through a ratio against the prediction stiffness, since with the current method it is a possibility that a combination of prescribed `tolerance` and `step_size` be such that the algorithm doesnt converge. Moreover, the `TRACK_v3.0` makes also use of the number of sleepers when calling the `black_box_model` therefore this method is currently omiting   necessary in reconstructing the actual state of the railway. It is possible that such incorporations could make this approach faster and more robust although for now they have not been deemed neccessary.  
 
-FINISH...
+| Sample       | Reconstruction run     |
+|--------------|------------------------|
+| Sample 1     | ![Sample 2 Reconstructions](_Alt/Figures/Graphs/Reconstruction/reconstruction2/reconstruction_s2.gif)         |
+| Sample 2     | ![Sample 2 Reconstructions](_Alt/Figures/Graphs/Reconstruction/reconstruction1/reconstruction_s1.gif)         |
+
+**Table 3**: Implementation of the reconstruction algorithm to predict railway component sitffness
+
+The algorithm was run timed through the `%%timeit` magic command from Jupter lab. The timing of both of the solver in both runs was the following,
+
+| Sample       | Time [s]  | Standard Deviation [s]  |
+|--------------|-----------|-------------------------|
+| Sample 1     | 30.2 s    | ± 4.8 s                 | 
+| Sample 2     | 36.3 s    | ± 8.4 s                 |
+
+**Table 4**: Effectiveness of the reconstruction algorithm for both samples.
+
+It is important to note that the effectiveness of the solution is to a great extent determined by the stifness guesses `kb_guess` and `kr_guess` and also by the determined `tolerance` and `step_size` but in the case of Sample 1 and Sample 2 not much tweaking was done to the hyperparameters and the solution was still stable and relatively fast.
 
 ## 3. Results - What is the structural health assesment of the examined railway locations  
 
@@ -214,10 +225,10 @@ We remember that the aim of this project was to construct a method capable of de
 |              | **Rail Stiffness**     |                   | **Ballast Stiffness** |                   |
 |--------------|------------------------|-------------------|--------------------|-------------------|
 | Distribution | Mean                   | Std               | Mean               | Std               |
-| Normal         | 7.563600e+08           | 3.220440e+08      | N/A                | N/A               |
-| Lognormal      | N/A                    | N/A               | 5.975530e+08       | 2.935236e+08      |
+| Normal       | 7.563600e+08           | 3.220440e+08      | N/A                | N/A               |
+| Lognormal    | N/A                    | N/A               | 5.975530e+08       | 2.935236e+08      |
 
-**Table 2**: Determined Component values for distributions
+**Table 5**: Determined Component values for distributions
 
 We then through means of the FE Module TRACK_v3.0 the signal processing matlab module and the optimisation algorithm built with these two. We were able to reconstruct the frequency response functions for both track locations and determine that there stiffnesses where,
 
@@ -226,7 +237,7 @@ We then through means of the FE Module TRACK_v3.0 the signal processing matlab m
 | **Sample 1** | 5.500e+08            | 8.00e+07           |
 | **Sample 2** | 4.7500e+08           | 6.00e+07           |
 
-**Table 3**: Determined Component values for distributions
+**Table 6**: Predicted sample stiffnesses for Sample 1 and Sample 2
 
 We then calculate the likelihood of these locations undergoing structural failure through by determining the confidence intervile the lie within where we require a 95th percentile confidence interval ($z \approx 1.96$) to assess a location as faulty. We now evaluate the **Rail stiffness** assuming a normal distribution with parameters in **TABLE 1** samples we obtain the samples are situated at,
 
