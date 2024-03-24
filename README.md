@@ -3,7 +3,10 @@
 ### Background
 Railway has become an increasingly popular transportation mode all over the world. In the Netherlands, the railway network reaches up to 3223 km in total and transports millions of passengers and million tonnes of freight every year. In recent decades, the Dutch railway keeps evolving to be safer, faster, and greener to become more competitive with air and road transport. The condition of railway tracks affects the safety, ride comfort, and sustainability of train operations. To achieve this goal, the health condition of railway tracks needs to be timely and properly maintained.
 
-![Smart railway infrastructure](https://cdnstorevoestalpine.blob.core.windows.net/images/815857/Open_CMS_Lightbox/roadmaster-visualisation.jpg)
+|<img src="https://cdnstorevoestalpine.blob.core.windows.net/images/815857/Open_CMS_Lightbox/roadmaster-visualisation.jpg" width="800">|
+|:----------------------------------------------------------------------:|
+| **Figure 1:** Hypothetical scheme of smart railway infrastructure |
+
 
 **Figure 2** shows a typical modern railway track structure. The rails are fixed on the sleepers by fasteners (consisting of rail pads and clamps). Rail pads are made of resilient material. The ballast layer also provides elasticity for the track structure. The stiffness of these two components determines the overall track stiffness. In practice, track stiffness can be measured by a non-destructive hammer test, as shown in **Figure 2**. The rail head is excited with a hammer, and the dynamic response (usually acceleration) is measured at the location of interest. Then, the input force and output accelerations are used to calculate a frequency response function (FRF), from which the track stiffness can be identified. 
 
@@ -21,7 +24,7 @@ The main components **which** contribute to the track stiffness are,
 
 | ![Figure 1](_Alt/Figures/Figure_1.png)|
 |----------------------------------------|
-|**Figure 1 & 2:** Typical arrangement of a railway track & a hammer test on a railway track. | 
+|**Figure 2,3 & 4:** Typical arrangement of a railway track & a hammer test on a railway track. | 
 
 
 ### Details
@@ -34,9 +37,9 @@ This study makes use of a 3D finite element model, as shown in <b>Figure 3</b>. 
 
 </blockquote>
 
-![Figure 3](_Alt/Figures/Figure_3.png)
-
-**Figure 3:** Mechanical scheme of the Finite element model. 
+| ![Figure 3](_Alt/Figures/Figure_3.png)|
+|----------------------------------------|
+| **Figure 5:** Mechanical scheme of the Finite element model. | 
 
 ## 1. A breakdown of the investigation and algorithm structure
 
@@ -44,13 +47,13 @@ We firstly begin by understanding and plotting the lab data two hammer tests whe
 
 | ![Figure 4](_Alt/Figures/Graphs/IH_tests.png) | ![Figure  5](_Alt/Figures/Graphs/ht_target_signal.png) |
 |----------------------------------------|----------------------------------------|
-|**Figure 4:** Laboratory hammer tests data. |**Figure 5:** Laboratory and railway Frequency response function |  
+|**Figure 6:** Laboratory hammer tests data. |**Figure 5:** Laboratory and railway Frequency response function |  
 
 We then continue by investigating the below two stiffness distributions of multiple measurement locations and the expected stiffnesses for rail stiffness (Kr) and ballast stiffness (Kb) components of healthy railway locations. From observation we can deduce fitting Gumbel, Log Normal may be most suitable. After fitting different distribution we then evaluate there suitableness through evaluating the value 'ks_statistic' or 'sumsquare_error'; the lower the value of 'ks_statistic' and 'sumsquare_error', the better is the fit of the distributtion. The results where the following,
 
 | ![Figure 6](_Alt/Figures/Graphs/KB_distribution.png) | ![Figure 7](_Alt/Figures/Graphs/KR_distribution.png) |
 |----------------------------------------|----------------------------------------|
-|**Figure 6:** Fitted distributions for ballast components stiffness. |**Figure 7:** Fitted distributions for rail components stiffness |  
+|**Figure 7:** Fitted distributions for ballast components stiffness. |**Figure 7:** Fitted distributions for rail components stiffness |  
 
 **Kr Distribution**: The Kolmogorov smirnov test for the rail stiffness indicates that the Type I Gumbel disitribution indicates the best fit. By contrary through the mean square error metric we would assume the Normal distribution would be the best fit which also the case according to the the ks_statistic which can be chosen as our distribution. Given the characteristics of both distribution since we are interested in capturing the greatest number of sample and perhaps may forego the precission of extreme values in the tails, we will assume the **Kr** to be best represented through a Normal distribution.
 
@@ -58,10 +61,10 @@ We then continue by investigating the below two stiffness distributions of multi
 
 |              | **Rail Stiffness** |                   | **Ballast Stiffness** |                   |
 |--------------|------------------------|-------------------|--------------------|-------------------|
-| Distribution | Mean                   | Std               | Mean               | Std               |
+| Distribution       | Mean                   | Std               | Mean               | Std               |
 | **Normal**         | **7.563600e+08**           | **3.220440e+08**      | 7.563600e+08      | 3.220440e+08      |
-| gumbel_l     | 9.188854e+08           | 3.127422e+08      |                    |                   |
-| gumbel_r     | 5.975530e+08           | 2.935236e+08      | 9.188854e+08      | 3.127422e+08      |
+| gumbel_l           | 9.188854e+08           | 3.127422e+08      |                    |                   |
+| gumbel_r           | 5.975530e+08           | 2.935236e+08      | 9.188854e+08      | 3.127422e+08      |
 | **Lognormal**      |                        |                   | **5.975530e+08**      | **2.935236e+08**      |
 
 **Table 1**: Mean and standard deviation for ballast stiffness samples (Lognormal distribution) and rail stiffness samples (Normal distribution) 
@@ -80,9 +83,9 @@ Performed scenarios:
 
 The results of the study are the following,
 
-![Figure 8](_Alt/Figures/Graphs/FRF_sensitivity_analysis.png)
-
-**Figure 8:** Solutions to the Frequency response function parametric study.
+| ![Figure 8](_Alt/Figures/Graphs/FRF_sensitivity_analysis.png) |
+|---------------------------------------------------------------|
+|**Figure 8:** Solutions to the Frequency response function parametric study. | 
 
 A breakdown of the behaviour of the frequency response function is the following. Peaks indicate the presence of the natural frequencies of the structure under test ie Resonance. For a ballasted track, between every pair of resonant frequencies, an anti-resonant frequency can be expected. A typical anti-resonant frequency is observed in discretely supported tracks with two elastic layers.
 
@@ -104,9 +107,9 @@ We therefore investigate firstly for different mesh sizes 1: Small and 2: Big me
 
 The  results of the investigation where the following,
 
-![Figure 9](_Alt/Figures/Graphs/MC_simul_results.png)
-
-**Figure 9:** Histrogram plot monte carlo simulation study on receptance bounds.
+| ![Figure 9](_Alt/Figures/Graphs/MC_simul_results.png)         |
+|---------------------------------------------------------------|
+| **Figure 9:** Histrogram plot monte carlo simulation study on receptance bounds. | 
 
 The results of the monte carlo study where quite comforting since they demonstrate that the response of the FRF is to a large extent similar to the stiffness samples since they follow the same distributions. Therefore we can assume that the specified bound locations are quite robustly the locutions wher if nearby peaks are detected we can assume healthy railway locations to be indentified. Moreover the investigation into the mesh size influence is also comforting since it demonstrates little influence on non exploded results (corresponding to the natural frequencies), in which case we can observe that a more refined mesh requires the frequency response to be much closer for resonance to occurr. Therefore in reconstruction or estimation the finer the mesh the more robust a solution will be since the actual response may be better reproduced.
 
@@ -114,9 +117,10 @@ The results of the monte carlo study where quite comforting since they demonstra
 
 We now average the monte carlo simulation response for a small and coarse mesh and compare it against the laboratory results. We can observe how the residuals are relatively small and decay at the same time as the signal does. This just refers to the importance of adequately predicting the first resonant peak in adequately reconstructing the signal.
 
-![Figure 9](_Alt/Figures/Graphs/MC_residuals.png)
 
-**Figure 9:** Histrogram plot monte carlo simulation study on receptance bounds.
+| ![Figure 10](_Alt/Figures/Graphs/MC_residuals.png)            |
+|---------------------------------------------------------------|
+| **Figure 10:** Histrogram plot monte carlo simulation study on receptance bounds. | 
 
 ## 2. The detection algorithm 
 
@@ -200,10 +204,10 @@ def inv_solver(DATA_LAB,Frequency_LAB,Kr_guess,Kb_guess,num_elem_slp,step_size, 
 ```
 Nevertheless, the author acknowledges some lackings in this approach which could be evaluated if in different scenarios these prove neccessary. Firstly the gradient based method can be significantly improved by having automaticly adjusted step sizes through a ratio against the prediction stiffness, since with the current method it is a possibility that a combination of prescribed `tolerance` and `step_size` be such that the algorithm doesnt converge. Moreover, the `TRACK_v3.0` makes also use of the number of sleepers when calling the `black_box_model` therefore this method is currently omiting   necessary in reconstructing the actual state of the railway. It is possible that such incorporations could make this approach faster and more robust although for now they have not been deemed neccessary.  
 
-| Sample       | Reconstruction run     |
-|--------------|------------------------|
-| Sample 1     | ![Sample 2 Reconstructions](_Alt/Figures/Graphs/Reconstruction/reconstruction2/reconstruction_s2.gif)         |
-| Sample 2     | ![Sample 2 Reconstructions](_Alt/Figures/Graphs/Reconstruction/reconstruction1/reconstruction_s1.gif)         |
+| Sample         | Reconstruction run     |
+|----------------|------------------------|
+| Sample 1       | ![Sample 2 Reconstructions](_Alt/Figures/Graphs/Reconstruction/reconstruction2/reconstruction_s2.gif)         |
+| Sample 2       | ![Sample 2 Reconstructions](_Alt/Figures/Graphs/Reconstruction/reconstruction1/reconstruction_s1.gif)         |
 
 **Table 3**: Implementation of the reconstruction algorithm to predict railway component sitffness
 
